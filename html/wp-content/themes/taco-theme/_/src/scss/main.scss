@@ -1,0 +1,42 @@
+@import "../../../node_modules/sass-to-js/sass/sass-to-js";
+
+// settings
+@import "global/variables";
+
+// util & mixins
+@import "util/environment";
+@import "util/mixins";
+@import "util/breakbeat";
+@import "util/remedy";
+@import "util/dev";
+
+// definitions
+@import "global/fonts";
+@import "global/colors";
+
+// with modernizr you can check for ie nonsense to write graceful fallbacks
+// @import "ie";
+@import "foundation/foundation";
+
+// global typography
+
+@import "global/typography";
+
+// above the fold
+@import "components/header";
+@import "components/banner";
+@import "components/slider";
+
+// define the overall styles for templates
+@import "global/theme";
+@import "global/page";
+@import "global/single";
+
+// components
+@import "components/forms";
+
+// below the fold
+@import "components/footer";
+
+// pages
+@import "pages/sample_page";

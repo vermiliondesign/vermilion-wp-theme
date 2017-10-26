@@ -1,0 +1,4 @@
+/* any elements in the wysiwyg to style when they are custom formatted */
+body#tinymce .cta-wrapper {
+  border: solid 1px green;
+}

@@ -1,0 +1,30 @@
+{
+  "name": "vermilion/app",
+  "description": "vermilion/app",
+  "license": "proprietary",
+  "minimum-stability": "dev",
+  "repositories":[
+    {
+      "type": "vcs",
+      "url": "git@github.com:tacowordpress2/tacowordpress.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:tacowordpress2/addmany.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:tacowordpress2/util.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:tacowordpress2/frontend-loader.git"
+    }
+  ],
+  "require": {
+    "tacowordpress2/tacowordpress": "^1.0",
+    "tacowordpress2/addmany": "^0.2",
+    "phpmailer/phpmailer": "5.2.23",
+    "tacowordpress2/util": "^1.0.1"
+  }
+}

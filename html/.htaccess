@@ -1,0 +1,145 @@
+# fail-safe in case the conf file doesn't have it
+Options All -Indexes
+
+# Conditional authentication on staging server
+# https://stackoverflow.com/questions/11073752/apache-htaccess-applying-basic-authentication-conditionally-based-on-environm
+AuthName "Restricted Area"
+AuthType Basic
+AuthUserFile /var/www/vhosts/client-name/.htpasswd
+
+Require valid-user
+Satisfy any
+Order deny,allow
+Deny from all
+Allow from env=!PROTECTED_ENV
+
+<FilesMatch "^wp-cron\.php$">
+  Allow from all
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+
+
+# CUSTOM SERVER VARS
+
+# You must use 'HTTP_' as prefix when setting custom vars.
+# This a security check on media temple servers
+
+# IMPORTANT: Do not change the order of the 3 rewrites below
+RewriteCond %{SERVER_NAME} !vermilion\.com
+RewriteRule ^ - [E=HTTP_APP_ENVIRONMENT:prod]
+
+RewriteCond %{SERVER_NAME} (\.vermilion\.com)
+RewriteRule ^ - [E=HTTP_APP_ENVIRONMENT:staging]
+
+RewriteCond %{SERVER_NAME} \.dev
+RewriteRule ^ - [E=HTTP_APP_ENVIRONMENT:dev]
+
+RewriteRule ^ - [E=HTTP_BOOTSTRAP_WP:%{DOCUMENT_ROOT}/wp-load.php]
+
+
+# fail-safe for apache redirects
+SetEnvIf REDIRECT_HTTP_APP_ENVIRONMENT (.+) HTTP_APP_ENVIRONMENT=$1
+SetEnvIf REDIRECT_HTTP_BOOTSTRAP_WP (.+) HTTP_BOOTSTRAP_WP=$1
+
+# exclude public access to composer's vendor dir from the theme folder
+# typically the vendor dir is never publically accessible
+
+RewriteCond %{REQUEST_FILENAME} !((.*)\.php)
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^wp-content/themes/taco-theme/app/core/vendor($|/) - [F,L]
+
+# enforce HTTPS
+# Avoid one layer of redirects by directing directly to www
+#RewriteCond %{HTTPS} !=on
+#RewriteCond %{HTTP_HOST} clientname\.com$ [NC]
+#RewriteRule ^(.*)$ https://www.clientname.com/$1 [L,R=301]
+
+# direct non-www to www
+## RewriteCond %{HTTP_HOST} ^clientname\.com$ [NC]
+## RewriteRule ^(.*)$ https://www.clientname.com/$1 [L,R=301]
+
+# Keep the legacy SSL redirect in for staging, etc
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [L,R=301]
+
+# robots.txt
+RewriteRule ^robots\.txt$ /wp-content/themes/taco-theme/templates/tmpl-robots-txt.php [L]
+
+# LEGACY REDIRECTS
+
+
+
+
+</IfModule>
+
+
+# DENY ACCESS TO FILES/DIRECTORIES
+
+# If you are going to forbid access to a directory, do something like the below (commented out).
+#RewriteRule ^folder_name(.*) - [F,L,NC]
+
+# forbid access to certain files by name
+<FilesMatch "(\.md|\.git\|\.gitignore|\.sql|\.sql.gz)">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+# OPTIMIZATION
+<IfModule mod_headers.c>
+  Header unset ETag
+  FileETag none
+</IfModule>
+
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+AddOutputFilterByType DEFLATE text/javascript
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/pdf "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType text/x-javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType application/x-shockwave-flash "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+  ExpiresByType font/eot "access plus 1 year"
+  ExpiresByType font/opentype "access plus 1 year"
+  ExpiresByType application/x-font-ttf "access plus 1 year"
+  ExpiresByType application/x-font-ttf "access plus 1 year"
+  ExpiresByType application/font-woff "access plus 1 year"
+  ExpiresByType application/x-font-woff "access plus 1 year"
+  ExpiresByType application/font-woff "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType application/font-woff2 "access plus 1 year"
+  ExpiresDefault "access plus 1 month"
+</IfModule>
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+  # Rewrite all files that aren't already in the wordpress directory to that subdirectory
+  # Serve up a file directly if it actually does exist
+  RewriteEngine on
+  RewriteCond %{REQUEST_URI} !^/wordpress/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ /wordpress/$1
+  
+  RewriteRule ^(/)?$ wordpress/index.php [L]
+</IfModule>
+# END WordPress

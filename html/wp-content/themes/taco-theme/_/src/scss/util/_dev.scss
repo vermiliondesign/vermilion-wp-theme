@@ -1,0 +1,46 @@
+#breakpoint-detector {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 0;
+  width: 0;
+  z-index: -9999;
+  visibility: hidden;
+  overflow: hidden;
+
+  &::before {
+    @each $breakpoint in $breakpoint-classes {
+      @include b('>= #{$breakpoint}') {
+        content: '#{$breakpoint}';
+      }
+    }
+  }
+}
+
+body.dev {
+  #breakpoint-detector {
+    position: fixed;
+    left: 0;
+    bottom: r(30px);
+    height: auto;
+    width: auto;
+    z-index: 99999;
+    padding: r(4px 9px);
+    background: #f00;
+    color: #fff;
+    font-size: r(16px);
+    visibility: visible;
+
+    &::before {
+      display: inline-block;
+    }
+  }
+}
+
+body.cache-enabled {
+  #breakpoint-detector {
+    &::after {
+      content: ' (Cache On)'
+    }
+  }
+}

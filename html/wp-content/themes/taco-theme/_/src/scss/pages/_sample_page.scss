@@ -1,0 +1,39 @@
+.page-template-tmpl-sample-page {
+  .sample-page-colors-list {
+    margin-top: r(30px);
+  }
+
+  .sample-color-block {
+    height: r(200px);
+    width: r(200px);
+    display: inline-block;
+    border: r(1px) solid black;
+    font-size: r(12px);
+    vertical-align: bottom;
+
+    p {
+      display: inline-block;
+      width: 100%;
+      background-color: white;
+      color: black;
+      border-bottom: r(1px solid black);
+      padding: r(5px);
+      margin: 0;
+    }
+  }
+
+  .sample-page-colors-json {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    height: 0;
+    width: 0;
+    z-index: -9999;
+    visibility: hidden;
+    overflow: hidden;
+
+    &::after {
+      content: sassToJs($colors);
+    }
+  }
+}

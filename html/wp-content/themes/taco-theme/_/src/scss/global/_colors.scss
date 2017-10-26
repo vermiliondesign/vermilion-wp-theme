@@ -1,0 +1,16 @@
+$colors: (
+  'white': #fff,
+  'black': #000
+);
+
+@function color($color) {
+  @return map-get($colors, $color);
+}
+
+// Define global color classes here
+@each $color_name, $color_value in $colors {
+  .bg-#{$color_name} {
+    background-color: color($color_name);
+    border-color: color($color_name);
+  }
+}

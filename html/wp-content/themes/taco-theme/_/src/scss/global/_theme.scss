@@ -1,0 +1,214 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto !important;
+}
+
+/* ===== sticky footer ===== */
+html, body {
+  min-height: 100%;
+}
+body {
+  margin: 0;
+}
+.page-wrap {
+  min-height: 55%;
+}
+
+
+// adjust the admin bar and header when user is logged in
+body.logged-in {
+  header {
+    top: 32px;
+  }
+}
+
+/* ===== utility classes ===== */
+ul,
+ol {
+  &.row {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+.table {
+  display: table;
+  .cell {
+    display: table-cell;
+  }
+}
+
+ol,
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background: black;
+  color: white;
+}
+
+.screen-reader-text {
+  font-size: 1;
+  color: transparent;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+// general styles as default
+a {
+  text-decoration: none;
+}
+
+// content class to be immediate parent of all wysiwygs and should come with default styles that can be overwritten on a moodule-to-module basis
+.content {
+  a {
+    text-decoration: underline;
+
+    &:link,
+    &:visited {
+
+    }
+    &:focus,
+    &:hover,
+    &:active {
+
+    }
+  }
+  blockquote {
+    p {
+    }
+    em {
+    }
+  }
+}
+
+
+
+
+// ===== wordpress image styles ===== //
+img.alignnone,
+img.alignleft,
+img.alignright {
+  margin-bottom: 18px;
+}
+img.alignleft {
+  float: left;
+  margin-right: 28px;
+}
+img.alignright {
+  float: right;
+  margin-left: 28px;
+}
+img.aligncenter {
+  display: block;
+  margin: 0 auto 18px;
+}
+img.aligncenter:after {
+  clear: both;
+}
+.gallery-caption {
+  padding: 0 24px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.wp-caption {
+  max-width: 100% !important;
+}
+
+// wp-caption
+.content {
+  .wp-caption-text {
+    font-size: .875rem !important;
+    margin: 0;
+    font-style: italic;
+    word-wrap: break-word;
+    font-style: normal;
+  }
+  .wp-caption {
+    display: inline-block;
+    max-width: 100%;
+    img {
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+  }
+  .wp-caption.alignleft,
+  .wp-caption.alignright {
+    padding-bottom: 20px;
+  }
+  .wp-caption.alignleft {
+    float: left;
+    padding-right: 20px;
+  }
+  .wp-caption.alignright {
+    float: right;
+    padding-left: 20px;
+  }
+}
+
+
+// galleries in general
+// use dd dl dt
+.content {
+  .gallery {
+    .gallery-item {
+      //min-height: 200px;
+      padding: 0 3%;
+      img {
+        border: none !important;
+        width: 100% !important;
+        height: auto !important;
+      }
+    }
+    .gallery-icon {
+      padding-bottom: 15px;
+    }
+  }
+}
+// custom galleries for logos, use itemtag="section" icontag="div" in the [gallery] shortcode options to vertically align logos in a logo gallery
+.content {
+  .gallery {
+    a {
+      display: inline-block;
+    }
+    figure.gallery-item {
+      display: table;
+      //height: 200px;
+      padding: 0 3%;
+      height: 220px;
+      margin: 0;
+      div.gallery-icon {
+        display: table-cell;
+        vertical-align: middle;
+        padding-bottom: 0;
+      }
+      .gallery-caption {
+        display: none !important;
+      }
+      img {
+        width: 100%;
+        height: auto !important;
+        border: none !important;
+      }
+    }
+    div.gallery-icon {
+      padding-bottom: 15px;
+    }
+  }
+}

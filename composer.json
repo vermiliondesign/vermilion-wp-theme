@@ -1,0 +1,45 @@
+{
+    "name": "vermilion/app",
+    "description": "vermilion/app",
+    "license": "proprietary",
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "wordpress",
+                "type": "webroot",
+                "version": "4.8",
+                "dist": {
+                    "type": "zip",
+                    "url": "https://github.com/WordPress/WordPress/archive/4.8.zip"
+                },
+                "require" : {
+                    "fancyguy/webroot-installer": "1.0.0"
+                }
+            }
+        }
+    ],
+    "require": {
+        "wordpress": "4.8",
+        "fancyguy/webroot-installer": "1.0.0"
+    },
+    "extra": {
+        "webroot-dir": "html/wordpress",
+        "webroot-package": "wordpress"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "cd html/wp-content/themes/taco-theme/app/core && composer install --optimize-autoloader",
+            "rm -rf html/wordpress/wp-content html/wordpress/wp-config-sample.php",
+            "if [ ! -L html/wordpress/.htaccess ]; then cp .htaccess-wordpress-default html/wordpress/.htaccess; fi",
+            "if [ ! -L ./shortcut-to-taco-theme ]; then ln -s html/wp-content/themes/taco-theme ./shortcut-to-taco-theme; fi"
+        ],
+        "post-update-cmd": [
+            "cd html/wp-content/themes/taco-theme/app/core && composer install --optimize-autoloader",
+            "rm -rf html/wordpress/wp-content html/wordpress/wp-config-sample.php",
+            "if [ ! -L html/wordpress/.htaccess ]; then cp .htaccess-wordpress-default html/wordpress/.htaccess; fi",
+            "if [ ! -L ./shortcut-to-taco-theme ]; then ln -s html/wp-content/themes/taco-theme ./shortcut-to-taco-theme; fi"
+        ]
+    }
+}
