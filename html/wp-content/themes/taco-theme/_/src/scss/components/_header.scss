@@ -1,9 +1,15 @@
 /* GENERIC STYLES */
 header {
-  background: red;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000;
   .container {
-    background: green;
     position: relative;
+  }
+  .container,
+  .menu-wrapper {
     @include clearfix;
   }
 }
@@ -11,10 +17,8 @@ header {
 /* logo-wrapper */
 .logo-wrapper {
   display: inline-block;
-  // position: absolute;
   top: 0;
   left: 0;
-  max-width: 30%;
 }
 /* logo */
 h1.logo {
@@ -37,8 +41,6 @@ h1.logo {
 /* menu-wrapper */
 .menu-wrapper {
   position: relative;
-  float: right;
-  max-width: 70%;
 }
 
 a {
@@ -50,6 +52,7 @@ a {
 nav {
   > ul {
     > li {
+      position: relative;
       > ul.sub-menu {
         display: none;
       }
@@ -66,11 +69,84 @@ a.mobile-menu-button {
   right: 0;
   background: yellow;
 }
+span.arrow-down-mobile {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: $lightest_gray;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+/* MOBILE MENU JAVASCRIPT */
+body.nav-open {
+  height: 100%;
+  overflow: hidden;
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+  }
+}
+
+/* GENERIC NAV DESIGN AND STYLING */
+header {
+  background: white;
+}
+nav {
+  > ul {
+    > li {
+      > a {
+        
+      }
+      > ul.sub-menu {
+        background: $lightest_gray;
+        > li {
+          > a {
+            display: block;
+            font-size: .875rem;
+            padding: 8px 5px;
+            &:link,
+            &:visited {
+              
+            }
+            &:focus,
+            &:hover,
+            &:active {
+              background: $light_gray;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 
 /* MOBILE ONLY */
 @media only screen and (max-width: $breakpoint_menu_only_mobile) {
-    
+  
+  /* sub menu toggle */
+  nav {
+    > ul {
+      > li {
+        &.open-sub-menu {
+          > ul.sub-menu {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  
+  
   /* turn on/off */
   .menu-wrapper {
     display: none;
@@ -87,9 +163,18 @@ a.mobile-menu-button {
 @media only screen and (min-width: $breakpoint_menu_only_desktop) {
 
   /* ===== LAYOUT ===== */
+  .logo-wrapper {
+    width: 30%;
+  }
+  .menu-wrapper {
+    width: 70%;
+    float: right;
+  }
   /* primary menu */
   .primary-wrapper {
     padding-top: 50px;
+    display: inline-block;
+    float: right;
   }
   
   nav {
@@ -109,12 +194,11 @@ a.mobile-menu-button {
           top: 100%;
           left: 0;
           width: 200px;
-          // display: none;
           z-index: 400;
-          background: white;
           > li {
             display: block;
             float: none;
+            margin: 0;
           }
         }
         &:hover {

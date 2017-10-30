@@ -9,19 +9,37 @@ $theme = AppOption::getInstance();
 
 
 <div id="breakpoint-detector"></div>
-<footer>
+
+<footer class="panel">
   <div class="row">
-    <div class="columns small-12">
-      
-      <?php if(has_nav_menu('menu_footer')) {
-        wp_nav_menu( array(
-          'theme_location' => 'menu_footer',
-          'container' => false,
-          'walker'=> new Arrow_Walker_Nav_Menu()
-        ) );
-      }
-      ?>
-      
+    <div class="columns small-12 medium-6">
+      <a href="<?php echo get_home_url(); ?>" class="logo">
+        <img src="https://placehold.it/150x70" alt="<?php echo get_bloginfo('name'); ?>">
+      </a>
+      <ul class="social-menu">
+        <li>
+          <a href="<?php echo $theme->social_facebook; ?>" title="Facebook">
+            <i class="fa fa-facebook"></i>
+          </a>
+        </li>
+        <li>
+          <a href="<?php echo $theme->social_twitter; ?>" title="Twitter">
+            <i class="fa fa-twitter"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="columns small-12 medium-6">
+      <div class="footer-menu-wrapper">
+        <?php if(has_nav_menu('menu_footer')) {
+          wp_nav_menu( array(
+            'theme_location' => 'menu_footer',
+            'container' => false,
+            'walker'=> new Arrow_Walker_Nav_Menu()
+          ) );
+        }
+        ?>
+      </div>
     </div>
   </div>
 </footer>

@@ -1,3 +1,23 @@
 footer {
-  
+  background: $light_gray;
+  .footer-menu-wrapper {
+    text-align: right;
+    ul {
+      @include clearfix;
+    }
+    li {
+      display: inline-block;
+      float: left;
+      margin-right: 5px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+ul.social-menu {
+  li {
+    display: inline-block;
+  }
 }

@@ -10,7 +10,6 @@ class AppOption extends \Taco\Post {
     return array_merge(self::getBaseFields(), array(
       'social_facebook'=>array('type'=>'link', 'label'=>'Facebook', 'default'=>'https://www.facebook.com/'),
       'social_twitter'=>array('type'=>'link', 'label'=>'Twitter', 'default'=>'https://twitter.com'),
-
       'analytics_key'=>array('type'=>'text', 'label'=>'Google Analytics ID', 'default'=>''),
       'analytics_tag_manager_key'=>array('type'=>'text', 'label'=>'Google Tag Manager ID', 'default'=>''),
     ));

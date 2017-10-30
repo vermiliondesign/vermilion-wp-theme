@@ -14,13 +14,13 @@ img {
 
 /* ===== sticky footer ===== */
 html, body {
-  min-height: 100%;
+  height: 100%;
 }
 body {
   margin: 0;
 }
 .page-wrap {
-  min-height: 55%;
+  min-height: 70%;
 }
 
 
@@ -32,7 +32,13 @@ body.logged-in {
 }
 
 /* ===== utility classes ===== */
-
+// because header is always absolute the first panel has padding top to compensate for this
+.first-panel {
+  padding-top: 80px;
+  @media only screen and (max-width: $breakpoint_menu_only_mobile) {
+    padding-top: 60px;
+  }
+}
 .table {
   display: table;
   .cell {
@@ -60,6 +66,9 @@ body.logged-in {
   width: 96%;
   max-width: 75rem;
 }
+.panel {
+  padding: 40px 0;
+}
 
 // general styles as default
 ul,
@@ -71,6 +80,16 @@ ol {
 }
 a {
   text-decoration: none;
+  color: $red;
+  &:link,
+  &:visited {
+    color: $red;
+  }
+  &:focus,
+  &:hover,
+  &:active {
+    color: $dark_red;
+  }
 }
 
 header,

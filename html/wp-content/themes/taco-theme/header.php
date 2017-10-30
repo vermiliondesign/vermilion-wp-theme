@@ -5,12 +5,14 @@
     <div class="logo-wrapper">
       <h1 class="logo">
         <a href="<?php echo get_home_url(); ?>">
-          <img src="https://placehold.it/300x80" alt="">
+          <img src="https://placehold.it/300x80" alt="<?php echo get_bloginfo('name'); ?>">
         </a>
       </h1>
     </div>
     
-    <a href="javascript:void(0)" class="mobile-menu-button">Menu</a>
+    <a href="javascript:void(0)" class="mobile-menu-button" title="Menu">
+      <i class="fa fa-bars"></i>
+    </a>
     
     <div class="menu-wrapper">
       <div class="primary-wrapper">
