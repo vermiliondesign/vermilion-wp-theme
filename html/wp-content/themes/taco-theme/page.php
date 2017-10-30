@@ -4,14 +4,13 @@ get_header();
 $page = \Taco\Post\Factory::create($post);
 ?>
 
-<?php // get banner style
+<?php // get banner
 include_with(__DIR__ . '/includes/incl-banner.php', array('page' => $page));
 ?>
 
-<article class="content">
-  
-  <?php echo $page->getTheContent(); ?>
-</article>
+<?php // get main content
+include_with(__DIR__ . '/includes/incl-component-main-content.php', array('page' => $page));
+?>
 
 
 <?php get_footer(); ?>

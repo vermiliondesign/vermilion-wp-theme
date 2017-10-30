@@ -1,3 +1,6 @@
+// imports
+@import "../../../node_modules/font-awesome/css/font-awesome.min.css";
+
 // example font mixins specified
 @mixin default_sans_serif {
   font-family: 'Quattrocento Sans', sans-serif;
@@ -19,4 +22,15 @@
 @mixin un_upper {
   text-transform: none;
   letter-spacing: normal;
+}
+
+// fontawesome
+@mixin fontawesome {
+  font-family: 'FontAwesome';
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

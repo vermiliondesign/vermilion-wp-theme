@@ -32,13 +32,6 @@ body.logged-in {
 }
 
 /* ===== utility classes ===== */
-ul,
-ol {
-  &.row {
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-}
 
 .table {
   display: table;
@@ -46,14 +39,6 @@ ol {
     display: table-cell;
   }
 }
-
-ol,
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
 ::selection {
   background: black;
   color: white;
@@ -69,10 +54,30 @@ ul {
   top: -9999px;
   left: -9999px;
 }
+.container,
+.row {
+  margin: 0 auto;
+  width: 96%;
+  max-width: 75rem;
+}
 
 // general styles as default
+ul,
+ol {
+  &.row {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
 a {
   text-decoration: none;
+}
+
+header,
+footer {
+  ul {
+    @include remove_list_styles;
+  }
 }
 
 // content class to be immediate parent of all wysiwygs and should come with default styles that can be overwritten on a moodule-to-module basis

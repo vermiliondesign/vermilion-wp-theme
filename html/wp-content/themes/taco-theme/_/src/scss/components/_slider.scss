@@ -38,9 +38,11 @@ html[xmlns] .slides {display: block;}
   .table {
     width: 100%;
     table-layout: fixed;
+    height: 400px;
   }
   .cell {
     width: 50%;
+    vertical-align: middle;
   }
   .cell.image {
     background-position: center center;

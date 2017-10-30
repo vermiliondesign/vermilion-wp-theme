@@ -70,5 +70,10 @@
   font-size: 1px;
   opacity: 0;
 }
+@mixin remove_list_styles {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
 
 /* CUSTOM MIXINS BASED ON THIS THEME */

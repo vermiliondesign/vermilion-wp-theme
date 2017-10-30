@@ -8,17 +8,11 @@ $theme = AppOption::getInstance();
 ?>
 
 <?php // get slider
-include_with(__DIR__ . '/../includes/incl-slider.php', array('page' => $page));
+include_with(__DIR__ . '/../includes/incl-component-slider.php', array('page' => $page));
 ?>
 
-<div class="main-content">
-  <div class="row">
-    <div class="columns small-12 medium-10">
-      <article class="content">
-        <?php echo $page->getTheContent(); ?>
-      </article>
-    </div>
-  </div>
-</div>
+<?php // get main content
+include_with(__DIR__ . '/../includes/incl-component-main-content-home.php', array('page' => $page));
+?>
 
 <?php get_footer(); ?>

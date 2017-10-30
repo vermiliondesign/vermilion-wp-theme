@@ -1,3 +1,150 @@
+/* GENERIC STYLES */
 header {
+  background: red;
+  .container {
+    background: green;
+    position: relative;
+    @include clearfix;
+  }
+}
+
+/* logo-wrapper */
+.logo-wrapper {
+  display: inline-block;
+  // position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 30%;
+}
+/* logo */
+h1.logo {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  a {
+    display: block;
+    padding: 0;
+    width: 100%;
+  }
+  img {
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+  }
+}
+
+/* menu-wrapper */
+.menu-wrapper {
+  position: relative;
+  float: right;
+  max-width: 70%;
+}
+
+a {
+  display: inline-block;
+  padding: 5px;
+}
+
+/* nav */
+nav {
+  > ul {
+    > li {
+      > ul.sub-menu {
+        display: none;
+      }
+    }
+  }
+}
+
+/* buttons */
+a.mobile-menu-button {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: yellow;
+}
+
+
+/* MOBILE ONLY */
+@media only screen and (max-width: $breakpoint_menu_only_mobile) {
+    
+  /* turn on/off */
+  .menu-wrapper {
+    display: none;
+  }
+  .arrow-down-mobile,
+  .mobile-menu-button {
+    display: block;
+  }
+    
+}
+
+
+/* DESKTOP ONLY */
+@media only screen and (min-width: $breakpoint_menu_only_desktop) {
+
+  /* ===== LAYOUT ===== */
+  /* primary menu */
+  .primary-wrapper {
+    padding-top: 50px;
+  }
   
+  nav {
+    ul {
+      @include clearfix;
+      > li {
+        display: inline-block;
+        position: relative;
+        float: left;
+        margin-right: 5px;
+        &:last-child {
+          margin-right: 0;
+        }
+        /* show sub-menu on hover */
+        > ul.sub-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 200px;
+          // display: none;
+          z-index: 400;
+          background: white;
+          > li {
+            display: block;
+            float: none;
+          }
+        }
+        &:hover {
+          > ul.sub-menu {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  /* utility menu */
+  .utility-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 10px;
+    ul {
+      @include clearfix;
+      > li {
+        display: inline-block;
+        float: left;
+      }
+    }
+  }
+  
+  /* turn on/off */
+  .arrow-down-mobile,
+  .mobile-menu-button {
+    display: none;
+  }
+
+
 }

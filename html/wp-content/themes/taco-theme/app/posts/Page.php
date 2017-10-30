@@ -65,7 +65,10 @@ class Page extends \Taco\Post {
         );
       break;
       default :
-        $template_fields = $this->getBannerFields();
+        $template_fields = array_merge(
+          $this->getBannerFields(),
+          $this->getSidebarDefaultFields()
+        );
       break;
     }
     
@@ -109,7 +112,10 @@ class Page extends \Taco\Post {
         $template_boxes = array_merge($default_boxes, $template_boxes);
       break;
       case 'default':
-        $template_boxes = $default_boxes;
+        $template_boxes = [
+          'Sidebar' => array_keys($this->getSidebarDefaultFields()),
+        ];
+        $template_boxes = array_merge($default_boxes, $template_boxes);
       break;
     }
 
@@ -137,6 +143,15 @@ class Page extends \Taco\Post {
     ];
   }
   
+  public function getSidebarDefaultFields() {
+    return [
+      'show_sidebar_breadcrumbs' => [
+        'type' => 'checkbox',
+        'description' => 'Check this box to show sidebar breadcrumbs.'
+      ]
+    ];
+  }
+  
   public function getHomeFields() {
     return $this->getSliderDefaultFields();
   }
@@ -153,17 +168,67 @@ class Page extends \Taco\Post {
     ];
   }
   
+  
+  /* used in sidebar breadcrumbs */
+  public static function getBreadcrumbVars($page) {
 
-  /**
-   * Get an array of demo fields
-   */
-  public function getDemoFields() {
-    return [
-      'demo' => [
-        'type' => 'text'
-      ]
-    ];
+    $nav_parent_title = '';
+    $nav_parent_permalink = '';
+        
+    // if this page has a post parent
+    if($page->post_parent !== 0) {
+      // $has_hierarchical_nav = true;
+      $nav_parent_title = get_the_title($page->post_parent);
+      $nav_parent_permalink = get_the_permalink($page->post_parent);
+      $args = array(
+        'child_of'     => $page->post_parent,
+        'depth'        => 0,
+        'echo'         => 2,
+        'sort_column'  => 'menu_order, post_title',
+        'sort_order'   => 'ASC',
+        'title_li'     => __(''),
+      );
+    }
+    elseif($page->post_parent === 0) {
+      // $has_hierarchical_nav = true;
+      $nav_parent_title = get_the_title($page->ID);
+      $nav_parent_permalink = get_the_permalink($page->ID);
+      $args = array(
+        'child_of'     => $page->ID,
+        'depth'        => 1,
+        'echo'         => 1,
+        'sort_column'  => 'menu_order, post_title',
+        'sort_order'   => 'ASC',
+        'title_li'     => __(''),
+      );
+    }
+    return array(
+      'nav_parent_title' => $nav_parent_title,
+      'nav_parent_permalink' => $nav_parent_permalink,
+      'args' => $args
+    );
+    
   }
+  
+  /* for the sidebar-breadcrumb, return bool */
+  public function isGrandchildPage() {
+    global $post;
+     if ( is_page() && (count(get_post_ancestors($post->ID)) >= 2) ) {
+      return true;
+     } else {
+      return false;
+     }
+  }
+  
+  public function getTopAncestor($id) {
+    $current = get_post($id);
+    if(!$current->post_parent){
+      return $current->ID;
+    } else {
+      return self::getTopAncestor($current->post_parent);
+    }
+  }
+  
 
     /**
    * Load the post fields based on the ID, or by using

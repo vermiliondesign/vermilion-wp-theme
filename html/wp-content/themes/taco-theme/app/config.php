@@ -6,4 +6,9 @@ define('THEME_VERSION', file_get_contents(__DIR__.'/../_/dist/webpack_hash'));
 define('THEME_SUFFIX', sprintf('?v=%s', THEME_VERSION));
 // define('USER_SUPER_ADMIN', 'vermilion_admin'); // vermilion_admin
 
-// any custom site vars
+// main content and breadcrumb defined classes
+define('STYLES_COLUMNS_MAIN_CONTENT_FULL', 'columns small-12 medium-11 large-10 columns-centered');
+define('STYLES_COLUMNS_MAIN_CONTENT_SIDEBAR_ARTICLE', 'columns small-12 medium-8');
+define('STYLES_COLUMNS_MAIN_CONTENT_SIDEBAR_BREADCRUMB', 'columns small-12 medium-4 large-3');
+
+// page ids
