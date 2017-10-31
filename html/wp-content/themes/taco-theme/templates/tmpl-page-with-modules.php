@@ -16,6 +16,11 @@ include_with(__DIR__ . '/../includes/incl-component-main-content.php', array('pa
 <?php // get main content
 include_with(__DIR__ . '/../includes/incl-component-slider.php', array('page' => $page));
 ?>
+
+<?php // get main content
+include_with(__DIR__ . '/../includes/incl-component-related-pages.php', array('page' => $page));
+?>
+
 <?php // get main content
 include_with(__DIR__ . '/../includes/incl-component-related-posts.php', array('page' => $page));
 ?>

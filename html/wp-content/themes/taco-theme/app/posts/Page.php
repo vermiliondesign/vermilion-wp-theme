@@ -63,6 +63,7 @@ class Page extends \Taco\Post {
           $this->getBannerFields(),
           $this->getSidebarDefaultFields(),
           $this->getSliderDefaultFields(),
+          $this->getRelatedPagesFields(),
           $this->getRelatedPostsFields()
         );
       break;
@@ -112,6 +113,7 @@ class Page extends \Taco\Post {
           'Sidebar' => array_keys($this->getSidebarDefaultFields()),
           'Modules' => array_merge(
             array_keys($this->getSliderDefaultFields()),
+            array_keys($this->getRelatedPagesFields()),
             array_keys($this->getRelatedPostsFields())
           )
         ];
@@ -173,7 +175,13 @@ class Page extends \Taco\Post {
       )->toArray(),
     ];
   }
-  
+
+  public function getRelatedPagesFields() {
+    return [
+      'related_pages' => \Taco\AddMany\Factory::createWithAddBySearch('Page', null, [])->toArray(),
+    ];
+  }
+
   public function getRelatedPostsFields() {
     return [
       'show_posts' => ['type' => 'checkbox', 'description' => 'Check this box to display the 3 latest posts on the page. Override the latest with curated posts by searching and adding posts with the Related Posts option below.'],
