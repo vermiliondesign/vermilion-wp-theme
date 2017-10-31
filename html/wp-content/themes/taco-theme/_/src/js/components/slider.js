@@ -6,8 +6,8 @@ var themeSlider = function(target) {
     touch: true,
     prevText: "",
     nextText: "",
-    controlsContainer: ".home-slider .slider-pagination .circle-pagination",
-    customDirectionNav: $(".home-slider .slider-pagination .prev-next")
+    controlsContainer: ".slider-container.default .slider-pagination .circle-pagination",
+    customDirectionNav: $(".slider-container.default .slider-pagination .prev-next")
   }).addClass('loaded');
 };
 

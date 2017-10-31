@@ -27,14 +27,96 @@ html[xmlns] .slides {display: block;}
   position: relative;
 }
 
-.flex-active {
-  color: #00ff00;
+
+
+/* generic / custom styles */
+// pagination
+.slider-pagination {
+  @include clearfix;
+  .prev-next,
+  .circle-pagination {
+    display: inline-block;
+    float: left;
+  }
+}
+// circle-pagination
+.circle-pagination {
+  ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  }
+  li {
+    display: inline-block;
+    a {
+      display: block;
+      position: relative;
+      width: 32px;
+      height: 32px;
+      color: transparent;
+      &:before {
+        @include fontawesome;
+        @include pseudo_element;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        color: $red;
+        // fa-circle-o
+        content: "\f10c";
+      }
+      &:hover,
+      &.flex-active {
+        // fa-circle
+        &:before {
+          content: "\f111";
+        }
+      }
+    }
+  }
+}
+// arrows
+.slider-pagination {
+  a.prev-next {
+    @include fontawesome;
+    position: relative;
+    color: transparent;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    &:before {
+      @include pseudo_element;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: $red;
+    }
+  }
+  a.flex-prev {
+    // fa-caret-left
+    &:before {
+      content: "\f0d9";
+    }
+  }
+  a.flex-next {
+    // fa-caret-right
+    &:before {
+      content: "\f0da";
+    }
+  }
 }
 
 
-/* custom styles */
 
+
+/* === custom styles === */
 .slider-container.default {
+  ul.slides {
+    background-color: $lightest_gray;
+  }
   .table {
     width: 100%;
     table-layout: fixed;
@@ -49,4 +131,10 @@ html[xmlns] .slides {display: block;}
     background-repeat: no-repeat;
     background-size: cover;
   }
+}
+
+// pagination and arrows
+.flex-control-nav,
+.flex-direction-nav {
+  display: inline-block;
 }

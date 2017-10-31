@@ -106,7 +106,7 @@ nav {
         
       }
       > ul.sub-menu {
-        background: $lightest_gray;
+        background: white;
         > li {
           > a {
             display: block;
@@ -119,10 +119,24 @@ nav {
             &:focus,
             &:hover,
             &:active {
-              background: $light_gray;
-              color: white;
+              background: $lightest_gray;
             }
           }
+          // active states
+          &.current-menu-item {
+            > a {
+              background: white;
+              color: $dark_red;
+            }
+          }
+        }
+      }
+      // active states
+      &.current-menu-item,
+      &.current-menu-ancestor {
+        > a {
+          color: $dark_red;
+          text-decoration: underline;
         }
       }
     }

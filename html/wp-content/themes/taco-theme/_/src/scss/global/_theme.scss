@@ -20,7 +20,7 @@ body {
   margin: 0;
 }
 .page-wrap {
-  min-height: 70%;
+  min-height: 80%;
 }
 
 
@@ -45,9 +45,19 @@ body.logged-in {
     display: table-cell;
   }
 }
+.center {
+  text-align: center;
+}
+
 ::selection {
   background: black;
   color: white;
+}
+
+.columns-centered {
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
 }
 
 .screen-reader-text {

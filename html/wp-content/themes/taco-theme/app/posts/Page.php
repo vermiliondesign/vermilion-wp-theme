@@ -61,7 +61,9 @@ class Page extends \Taco\Post {
       case 'templates/tmpl-page-with-modules.php':
         $template_fields = array_merge(
           $this->getBannerFields(),
-          $this->getSliderDefaultFields()
+          $this->getSidebarDefaultFields(),
+          $this->getSliderDefaultFields(),
+          $this->getRelatedPostsFields()
         );
       break;
       default :
@@ -107,7 +109,11 @@ class Page extends \Taco\Post {
       break;
       case 'templates/tmpl-page-with-modules.php':
         $template_boxes = [
-          'Modules' => array_keys($this->getSliderDefaultFields()),
+          'Sidebar' => array_keys($this->getSidebarDefaultFields()),
+          'Modules' => array_merge(
+            array_keys($this->getSliderDefaultFields()),
+            array_keys($this->getRelatedPostsFields())
+          )
         ];
         $template_boxes = array_merge($default_boxes, $template_boxes);
       break;
@@ -168,6 +174,12 @@ class Page extends \Taco\Post {
     ];
   }
   
+  public function getRelatedPostsFields() {
+    return [
+      'show_posts' => ['type' => 'checkbox', 'description' => 'Check this box to display the 3 latest posts on the page. Override the latest with curated posts by searching and adding posts with the Related Posts option below.'],
+      'related_posts' => \Taco\AddMany\Factory::createWithAddBySearch('Post', null, [])->toArray(),
+    ];
+  }
   
   /* used in sidebar breadcrumbs */
   public static function getBreadcrumbVars($page) {

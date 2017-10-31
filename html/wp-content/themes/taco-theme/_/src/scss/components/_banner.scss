@@ -2,8 +2,18 @@
   
 }
 
+.banner.default {
+  
+}
+
 .banner.with-image {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  .table {
+    height: 400px;
+  }
+  .cell {
+    vertical-align: middle;
+  }
 }

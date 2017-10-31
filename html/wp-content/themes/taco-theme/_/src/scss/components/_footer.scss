@@ -4,6 +4,7 @@ footer {
     text-align: right;
     ul {
       @include clearfix;
+      display: inline-block;
     }
     li {
       display: inline-block;

@@ -1,6 +1,7 @@
 <?php
 $sliders = $page->slider;
 ?>
+<?php if($sliders) : ?>
 <div class="slider-container default">
 <div class="flex-container">
 <div class="flexslider">
@@ -14,15 +15,17 @@ $sliders = $page->slider;
         &nbsp;
       </div>
       <?php } // if image_path ?>
-      <div class="cell details">
+      <div class="cell details center">
         <div class="inner content">
 
-          <?php echo $slide->slide_textarea; ?>
+          <?php echo $slide->getThe('slide_textarea'); ?>
           
           <?php if(strlen($slide->slide_link)) { ?>
-          <span class="cta-wrapper">
-            <?php echo $slide->getLinkHTML('slide_link'); ?>
-          </span>
+          <p>
+            <span class="cta-wrapper">
+              <?php echo $slide->getLinkHTML('slide_link'); ?>
+            </span>
+          </p>
           <?php } // if link ?>
         </div>
       </div>
@@ -40,3 +43,4 @@ $sliders = $page->slider;
 </div>
 </div>
 </div>
+<?php endif; ?>
