@@ -31,9 +31,11 @@
 @import "global/theme";
 @import "global/page";
 @import "global/single";
+@import "global/module";
 
 // components
 @import "components/forms";
+@import "components/related-posts";
 
 // below the fold
 @import "components/footer";
