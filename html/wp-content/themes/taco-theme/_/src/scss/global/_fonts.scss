@@ -16,7 +16,7 @@
 
 // utility mixins
 @mixin upper {
-  text-transform: upper;
+  text-transform: uppercase;
   letter-spacing: .05em;
 }
 @mixin un_upper {
@@ -33,4 +33,16 @@
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+
+/* CUSTOM THEME MIXINS */
+
+@mixin cta_wrapper {
+  @include default_sans_serif_secondary;
+  @include upper;
+  font-size: .675rem;
+  line-height: 1.2;
 }

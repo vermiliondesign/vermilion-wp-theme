@@ -1,0 +1,28 @@
+.cta-wrapper {
+  display: inline-block;
+  span, a {
+    @include cta_wrapper;
+    padding: 8px 15px 5px;
+    color: white;
+    background: $red;
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    @include transition(all 100ms ease-in-out);
+    &:link,
+    &:visited {
+      background: $red;
+      color: white;
+    }
+    &:focus,
+    &:hover {
+      background: $dark_red;
+      color: white;
+    }
+    &:active {
+      background: $red;
+      color: white;
+    }
+  }
+}

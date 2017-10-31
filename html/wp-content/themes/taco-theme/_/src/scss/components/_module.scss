@@ -1,0 +1,62 @@
+
+
+/* GENERIC COMPONENTS */
+.panel.post-list {
+  ul {
+    @include remove_list_styles;
+    @include clearfix;
+  }
+  .featured-image {
+    // vertical align middle the images inside canvas
+    a {
+      display: block;
+      position: relative;
+      width: 100%;
+      overflow:hidden;
+      height: 240px;
+    }
+    img {
+      position: absolute;
+      width: 100%;
+      top:-100%;
+      bottom:-100%;
+      left:0;
+      right: 0;
+      margin: auto;
+    }
+  }
+  // floating columned version
+  &.columned-version {
+    li {
+      width: 100%;
+      max-width: 400px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    &.two-across {
+      li {
+        width: 45%;
+        max-width: 45%;
+        margin-right: 10%;
+        display: inline-block;
+        float: left;
+        &:nth-of-type(2n) {
+          margin-right: 0;
+        }
+      }
+    }
+    &.three-across {
+      li {
+        width: 31.3%;
+        max-width: 31.3%;
+        margin-right: 3%;
+        display: inline-block;
+        float: left;
+        &:nth-of-type(3n) {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

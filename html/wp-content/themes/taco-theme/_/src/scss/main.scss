@@ -31,11 +31,12 @@
 @import "global/theme";
 @import "global/page";
 @import "global/single";
-@import "global/module";
+@import "global/cta-wrapper";
 
 // components
 @import "components/forms";
-@import "components/related-posts";
+@import "components/module";
+
 
 // below the fold
 @import "components/footer";

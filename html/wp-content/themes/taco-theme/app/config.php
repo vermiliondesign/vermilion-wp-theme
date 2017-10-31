@@ -8,6 +8,8 @@ define('THEME_SUFFIX', sprintf('?v=%s', THEME_VERSION));
 
 // main content and breadcrumb defined classes
 define('STYLES_COLUMNS_MAIN_CONTENT_FULL', 'columns small-12 medium-11 large-10 columns-centered');
+define('STYLES_COLUMNS_MAIN_CONTENT_FULL_WIDE', 'columns small-12 medium-11 columns-centered');
+define('STYLES_COLUMNS_MAIN_CONTENT_FULL_NARROW', 'columns small-12 medium-11 large-8 columns-centered');
 define('STYLES_COLUMNS_MAIN_CONTENT_SIDEBAR_ARTICLE', 'columns small-12 medium-8');
 define('STYLES_COLUMNS_MAIN_CONTENT_SIDEBAR_BREADCRUMB', 'columns small-12 medium-4 large-3');
 

@@ -8,3 +8,18 @@ body {
 h1, h2, h3, h4, h5, h6 {
   @include default_sans_serif_secondary;
 }
+
+
+/* special elements and typography */
+.panel-title {
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 1.8rem;
+    @include upper;
+  }
+  @media only screen and (max-width: $breakpoint_menu_only_mobile) {
+    font-size: 1.2rem;
+  }
+}
+p.date {
+  @include cta_wrapper;
+}

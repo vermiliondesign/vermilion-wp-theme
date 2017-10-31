@@ -32,11 +32,10 @@ html[xmlns] .slides {display: block;}
 /* generic / custom styles */
 // pagination
 .slider-pagination {
-  @include clearfix;
+  text-align: center;
   .prev-next,
   .circle-pagination {
     display: inline-block;
-    float: left;
   }
 }
 // circle-pagination
@@ -93,6 +92,7 @@ html[xmlns] .slides {display: block;}
       width: 100%;
       height: 100%;
       color: $red;
+      padding-top: 11px;
     }
   }
   a.flex-prev {

@@ -1,7 +1,6 @@
 <?php // related posts vars
 $related_post_title = "Latest Posts";
 $related_post_class = "";
-$related_post_class_width = STYLES_COLUMNS_MAIN_CONTENT_FULL;
 $related_posts = Post::getWhere(array(
    'orderby' =>'post_date',
    'order'   =>'DESC',
@@ -13,11 +12,9 @@ if($page->related_posts) {
 }
 if(count($related_posts) % 2 === 0) {
   $related_post_class = "two-across";
-  $related_post_class_width = STYLES_COLUMNS_MAIN_CONTENT_FULL_NARROW;
 }
 if(count($related_posts) % 3 === 0) {
   $related_post_class = "three-across";
-  $related_post_class_width = STYLES_COLUMNS_MAIN_CONTENT_FULL_WIDE;
 }
 ?>
 
@@ -27,7 +24,7 @@ if(count($related_posts) % 3 === 0) {
     <h2><?php echo $related_post_title; ?></h2>
   </div>
   <div class="row">
-    <div class="<?php echo $related_post_class_width; ?>">
+    <div class="<?php echo STYLES_COLUMNS_MAIN_CONTENT_FULL; ?>">
       <ul>
         <?php foreach($related_posts as $related_post) {
         // get featured image path if any
@@ -45,9 +42,6 @@ if(count($related_posts) % 3 === 0) {
             </a>
           </div>
           <div class="details">
-            <p class="date">
-              <?php echo date('M d, Y', strtotime($related_post->post_date)); ?>
-            </p>
             <h3>
               <a href="<?php echo $related_post->getPermalink(); ?>">
                 <?php echo $related_post->getTheTitle(); ?>
