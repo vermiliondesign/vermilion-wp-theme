@@ -6,37 +6,17 @@
   <div class="row">
     <div class="<?php echo STYLES_COLUMNS_MAIN_CONTENT_FULL_NARROW; ?>">
       <ul>
-        <?php foreach($related_pages as $related_page) {
+        <?php foreach($related_pages as $post) {
         // get featured image path if any
-        $related_page_featured_image_bool = has_post_thumbnail($related_page->ID);
-        $related_page_featured_image_url = "";
-        if($related_page_featured_image_bool) {
-            $related_page_featured_image_url = wp_get_attachment_image_src( get_post_thumbnail_id( $related_page->ID ), 'medium' );
-            $related_page_featured_image_url = $related_page_featured_image_url[0];
-        }
+        $post_image_url = getPostFeaturedImage($post);
         ?>
-        <li>
-          <?php if(strlen($related_page_featured_image_url)) { ?>
-          <div class="featured-image">
-            <a href="<?php echo $related_page->getPermalink(); ?>">
-              <img src="<?php echo $related_page_featured_image_url; ?>" alt="<?php echo $related_page->getTheTitle(); ?>">
-            </a>
-          </div>
-          <?php } // if featured image ?>
-          <div class="details">
-            <h3>
-              <a href="<?php echo $related_page->getPermalink(); ?>">
-                <?php echo $related_page->getTheTitle(); ?>
-              </a>
-            </h3>
-            <?php echo $related_page->getTheExcerpt(); ?>
-            <p>
-              <span class="cta-wrapper">
-                <a href="<?php echo $related_page->getPermalink(); ?>">Learn More</a>
-              </span>
-            </p>
-          </div>
-        </li>
+        <?php
+        include_with(__DIR__ . '/module/module-post-list-item.php', array(
+          'post' => $post,
+          'show_date' => false,
+          'post_image_url' => $post_image_url,
+          'cta_text' => 'Learn More'
+        )); ?>
         <?php } // foreach related post ?>
       </ul>
     </div>

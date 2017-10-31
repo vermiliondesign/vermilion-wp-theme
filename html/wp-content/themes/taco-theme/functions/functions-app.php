@@ -486,6 +486,17 @@ if (function_exists('prune_super_cache')) {
   add_action( 'save_post', 'wp_super_cache_clear_cache' );
 }
 
+// get page/post featured image
+function getPostFeaturedImage($post) {
+  $post_image_bool = has_post_thumbnail($post->ID);
+  $post_image_url = "";
+  if($post_image_bool) {
+      $post_image_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
+      $post_image_url = $post_image_url[0];
+  }
+  return $post_image_url;
+}
+
 
 // render banner function
 function renderBanner($dir_path, $page) {

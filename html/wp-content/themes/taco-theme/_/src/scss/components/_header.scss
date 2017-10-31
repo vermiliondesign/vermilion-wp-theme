@@ -80,21 +80,6 @@ span.arrow-down-mobile {
   cursor: pointer;
 }
 
-
-/* MOBILE MENU JAVASCRIPT */
-body.nav-open {
-  height: 100%;
-  overflow: hidden;
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: scroll;
-  }
-}
-
 /* GENERIC NAV DESIGN AND STYLING */
 header {
   background: white;
@@ -146,7 +131,20 @@ nav {
 
 /* MOBILE ONLY */
 @media only screen and (max-width: $breakpoint_menu_only_mobile) {
-  
+  /* MOBILE MENU JAVASCRIPT */
+  body.nav-open {
+    height: 100%;
+    overflow: hidden;
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: scroll;
+    }
+  }
+    
   /* sub menu toggle */
   nav {
     > ul {

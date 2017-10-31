@@ -29,38 +29,20 @@ if(count($related_posts) % 3 === 0) {
   <div class="row">
     <div class="<?php echo $related_post_class_width; ?>">
       <ul>
-        <?php foreach($related_posts as $related_post) {
-        // get featured image path if any
-        $related_post_featured_image_bool = has_post_thumbnail($related_post->ID);
-        $related_post_featured_image_url = get_asset_path('_/img/post-placeholder-400x400.jpg');
-        if($related_post_featured_image_bool) {
-            $related_post_featured_image_url = wp_get_attachment_image_src( get_post_thumbnail_id( $related_post->ID ), 'medium' );
-            $related_post_featured_image_url = $related_post_featured_image_url[0];
-        }
+        <?php foreach($related_posts as $post) {
+          
+        // get featured image or set fallback
+        $post_image_url = ( strlen(getPostFeaturedImage($post)) ) ? getPostFeaturedImage($post) : get_asset_path('_/img/post-placeholder-400x400.jpg');
         ?>
-        <li>
-          <div class="featured-image">
-            <a href="<?php echo $related_post->getPermalink(); ?>">
-              <img src="<?php echo $related_post_featured_image_url; ?>" alt="<?php echo $related_post->getTheTitle(); ?>">
-            </a>
-          </div>
-          <div class="details">
-            <p class="date">
-              <?php echo date('M d, Y', strtotime($related_post->post_date)); ?>
-            </p>
-            <h3>
-              <a href="<?php echo $related_post->getPermalink(); ?>">
-                <?php echo $related_post->getTheTitle(); ?>
-              </a>
-            </h3>
-            <?php echo $related_post->getTheExcerpt(); ?>
-            <p>
-              <span class="cta-wrapper">
-                <a href="<?php echo $related_post->getPermalink(); ?>">Read the Article</a>
-              </span>
-            </p>
-          </div>
-        </li>
+        
+        <?php
+        include_with(__DIR__ . '/module/module-post-list-item.php', array(
+          'post' => $post,
+          'show_date' => true,
+          'post_image_url' => $post_image_url,
+          'cta_text' => 'Read the Article'
+        )); ?>
+        
         <?php } // foreach related post ?>
       </ul>
     </div>
