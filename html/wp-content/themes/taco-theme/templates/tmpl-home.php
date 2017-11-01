@@ -15,4 +15,5 @@ include_with(__DIR__ . '/../includes/incl-component-slider.php', array('page' =>
 include_with(__DIR__ . '/../includes/incl-component-main-content-home.php', array('page' => $page));
 ?>
 
+
 <?php get_footer(); ?>

@@ -2,11 +2,11 @@
 @import "../../../node_modules/font-awesome/css/font-awesome.min.css";
 
 // example font mixins specified
-@mixin default_sans_serif {
+@mixin sans_serif {
   font-family: 'Quattrocento Sans', sans-serif;
 }
 
-@mixin default_sans_serif_secondary {
+@mixin sans_serif_secondary {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -41,8 +41,14 @@
 /* CUSTOM THEME MIXINS */
 
 @mixin cta_wrapper {
-  @include default_sans_serif_secondary;
+  @include sans_serif_secondary;
   @include upper;
-  font-size: .675rem;
+  font-size: .775rem;
   line-height: 1.2;
+}
+
+@mixin date_font {
+  @include cta_wrapper;
+  font-size: .875rem;
+  font-weight: 700;
 }

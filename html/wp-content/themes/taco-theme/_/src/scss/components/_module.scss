@@ -1,4 +1,57 @@
+.module.post-pagination {
+  .table {
+    width: 100%;
+    table-layout: fixed;
+  }
+  .cell {
+    vertical-align: middle;
+  }
+  .pagination {
+    text-align: right;
+    ol {
+      @include remove_list_styles;
+      display: inline-block;
+    }
+    li {
+      display: inline-block;
+      margin-right: 5px;
+      a {
+        display: inline-block;
+        display: inline-block;
+        width: 21px;
+        height: 21px;
+        text-align: center;
+        @include border_radius(50%);
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+      &.on,
+      &:hover {
+        a {
+          background: $red;
+          color: white;
+        }
+      }
+    }
+  }
+}
 
+.module.terms-group {
+  .label,
+  ul {
+    display: inline-block;
+  }
+  li {
+    display: inline-block;
+    &:only-child,
+    &:last-child {
+      .comma {
+        display: none;
+      }
+    }
+  }
+}
 
 /* GENERIC COMPONENTS */
 .panel.post-list {
@@ -6,8 +59,8 @@
     @include remove_list_styles;
     @include clearfix;
   }
-  li {
-    margin-bottom: 20px;
+  li.post-item {
+    margin-bottom: 3rem;
   }
   .featured-image {
     // vertical align middle the images inside canvas
@@ -28,9 +81,23 @@
       margin: auto;
     }
   }
+  .details {
+    @include remove_margin_first_last_child;
+  }
+  p.date {
+    margin-bottom: 0;
+  }
+  h3 {
+    margin: .25rem 0 .5rem;
+  }
+  .excerpt {
+    p {
+      margin: .5rem 0;
+    }
+  }
   // floating columned version
   &.columned-version {
-    li {
+    li.post-item {
       width: 100%;
       max-width: 400px;
       display: block;
@@ -38,12 +105,13 @@
       margin-right: auto;
     }
     .featured-image {
+      margin-bottom: 1.5rem;
       a {
         height: 240px;
       }
     }
     &.two-across {
-      li {
+      li.post-item {
         width: 45%;
         max-width: 45%;
         margin-right: 10%;
@@ -55,7 +123,7 @@
       }
     }
     &.three-across {
-      li {
+      li.post-item {
         width: 31.3%;
         max-width: 31.3%;
         margin-right: 3%;
@@ -68,7 +136,7 @@
     }
   }
   &.stacked-version {
-    li {
+    li.post-item {
       display: table;
       table-layout: fixed;
     }

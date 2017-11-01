@@ -3,9 +3,15 @@ get_header();
 
 //setup the page
 $page = \Taco\Post\Factory::create($post);
+
 // set immediate pagination vars for query
 $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $per_page = get_option('posts_per_page');
+
+// additional pagination information
+$link_prefix = '/blog';
+$all_count = Post::getCount();
+$range = getPaginationRange($paged, $per_page, $all_count);
 
 // get blog posts
 $blog_posts = Post::getWhere(array(
@@ -13,96 +19,65 @@ $blog_posts = Post::getWhere(array(
   'order' => 'DESC',
   'posts_per_page' => $per_page,
   'offset' => ($current_page -1) * $per_page,
-  'post__not_in' => array($featured_post_id)
+  // 'post__not_in' => array($featured_post_id)
 ));
 
-// setup pagination information
-$link_prefix = '/blog';
-$range = '';
-$all_count = Post::getCount();
-
-// setup pagination report information, only for paged pages
-if($paged !== 0) {
-  $first_range = ($per_page * ($paged - 1)) + 1;
-  $second_range = $per_page * $paged;
-  if($second_range > $all_count) {
-    $second_range = $all_count;
-  }
-  $range = $first_range . '-' . $second_range;
-}
-
+// setup first page var
+$first_page = getFirstPageStatus($current_page);
 ?>
 
 
+<?php // get banner
+include_with(__DIR__ . '/../includes/incl-banner.php', array('page' => $page));
+?>
+
+
+<?php // get main content
+if($first_page) :
+include_with(__DIR__ . '/../includes/incl-component-main-content.php', array('page' => $page));
+endif;
+?>
 
 
 <?php // get blog posts
 if(Arr::iterable($blog_posts)) : ?>
 
-<div class="row">
-  <div class="columns small-12 medium-11 large-8">
-    <div class="post-pagination table">
-      <div class="cell">
-        <?php if($range) { // if not the first page ?>
-        <p>Displaying <?php echo $range; ?> of <?php echo $all_count; ?></p>
-        <?php } else { ?>
-        <p>Displaying 1-<?php echo $per_page; ?> of <?php echo $all_count; ?></p>
-        <?php } ?>
-      </div>
-      <div class="cell">
-        <div class="pagination">
-          <ul>
-          <?php echo get_pagination($current_page, $all_count, 5, $per_page, false, $link_prefix); ?>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<?php // get pagination
+include_with(__DIR__ . '/../includes/module/module-pagination.php', array(
+  'page' => $page,
+  'range' => $range,
+  'all_count' => $all_count,
+  'per_page' => $per_page,
+  'current_page' => $current_page,
+  'link_prefix' => $link_prefix
+));
+?>
 
+<?php // get blog posts
+include_with(__DIR__ . '/../includes/incl-component-post-list.php', array(
+  'page' => $page,
+  'posts' => $blog_posts,
+  'list_version' => 'stacked-version',
+  'list_column_class' => '',
+  'list_width' => STYLES_COLUMNS_MAIN_CONTENT_FULL_NARROW,
+  'list_title' => 'Latest Posts',
+  'list_item_image_fallback' => '',
+  'list_item_show_date' => true,
+  'list_item_taxonomies' => array('category'),
+  'list_item_cta_text' => 'Read the Article'
+));
+?>
 
-<div class="row">
-  <div class="columns small-12">
-    <ul>
-      <?php foreach($blog_posts as $blog_post) { ?>
-      <li class="post-item">
-        <a href="<?php echo $blog_post->getPermalink(); ?>">
-          <h3><?php echo $blog_post->getTheTitle(); ?></h3>
-          <p class="post-date-wrapper">
-            <span class="post-date">
-              <?php echo date('l, M d, Y', strtotime($blog_post->get('post_date'))); ?>
-            </span>
-          </p>
-          <?php echo $blog_post->getTheExcerpt(); ?>
-        </a>
-      </li>
-      <?php } // foreach ?>
-    </ul>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="columns small-12">
-    <div class="post-pagination table">
-      <div class="cell">
-        <?php if($range) { // if not the first page ?>
-        <p>Displaying <?php echo $range; ?> of <?php echo $all_count; ?></p>
-        <?php } else { ?>
-        <p>Displaying 1-<?php echo $per_page; ?> of <?php echo $all_count; ?></p>
-        <?php } ?>
-      </div>
-      <div class="cell">
-        <div class="pagination">
-          <ul>
-          <?php echo get_pagination($current_page, $all_count, 5, $per_page, false, $link_prefix); ?>
-          </ul>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</div>
+<?php // get pagination
+include_with(__DIR__ . '/../includes/module/module-pagination.php', array(
+  'page' => $page,
+  'range' => $range,
+  'all_count' => $all_count,
+  'per_page' => $per_page,
+  'current_page' => $current_page,
+  'link_prefix' => $link_prefix
+));
+?>
 
 <?php endif; // if blog posts ?>
 

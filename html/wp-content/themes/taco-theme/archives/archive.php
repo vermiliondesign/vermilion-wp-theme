@@ -1,93 +1,95 @@
 <?php
-
 get_header();
 
+// setup archive vars
 global $wp_query;
 
-$queried_post_year = $wp_query->query['year'];
-
-// make sure only the queried post type is queried, otherwise it could display all
+// make sure only blog posts are queried, otherwise resources will show up too
 $args = array_merge( $wp_query->query_vars, array( 'post_type' => 'post' ) );
-$results = query_posts( $args );
+$blog_posts = query_posts( $args );
+// setup taco posts based on $wp_query
+$blog_posts = \Taco\Post\Factory::createMultiple($blog_posts);
 
-// turn into taco object
-$results = \Taco\Post\Factory::createMultiple($results);
+// query vars
+$category       = get_queried_object();
+$category_title = $category->name; // Same as single_tag_title()
+$category_slug  = $category->slug;
+$category_id  = $category->term_id;
+$category_taxonomy = $category->taxonomy;
+$category_taxonomy_title = $category_taxonomy;
 
-$results_count = count($results);
+// taxonomies
+// categories
+$categories = Post::getAllCategories();
+$categories = array_filter($categories, function($category) {
+  // Remove 'Uncategorized' category
+  return ($category->name !== 'Uncategorized');
+});
+
+// PAGINATION VARS
+// set immediate pagination vars for query
+$current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
+$per_page = get_option('posts_per_page');
+$link_prefix = '/' . $category_taxonomy . '/' . $category_slug;
+// find out total number in term group
+$all_blog_posts = Post::getByTerm($category_taxonomy, $category_slug);
+$all_count = count($all_blog_posts);
+$range = getPaginationRange($paged, $per_page, $all_count);
 
 ?>
 
+<!-- to be same markup as banner-default -->
 <div class="first-panel">
   <div class="banner default">
-    <div class="figure-wrapper">
-      &nbsp;
-    </div>
     <div class="row">
-      <div class="inner">
-        <h1>Year of News:</h1>
-        <p class="sub-title"><?php echo $queried_post_year; ?></p>
+      <div class="<?php echo STYLES_COLUMNS_MAIN_CONTENT_FULL; ?>">
+        <h1>Archive</h1>
       </div>
     </div>
   </div>
 </div>
 
 
-<!-- main-content -->
-<div class="panel main-content">
-  
-<div class="row">
-  <div class="columns small-12 medium-11 large-8">
-    <div class="post-pagination table">
-      <div class="cell">
-        <p>Found <?php echo $results_count; ?> result<?php echo ($results_count === 1) ? '' : 's' ; ?></p>
-      </div>
-    </div>
-  </div>
-</div>
-  
-  <article class="row">
-    <div class="columns small-10 medium-8 content">
+<?php // get blog posts
+if(Arr::iterable($blog_posts)) : ?>
 
-      <?php if(Arr::iterable($results)) : ?>
-      
-      <ol>
-      <?php foreach($results as $post): ?>
-        
-        <li>
-          
-          <h3>
-            <a href="<?php echo $post->getPermalink(); ?>"><?php echo $post->getTheTitle(); ?></a>
-          </h3>
-          <p class="post-date-wrapper">
-            <span class="post-date">
-              <?php echo date('l, M d, Y', strtotime($post->get('post_date'))); ?>
-            </span>
-          </p>
+<?php // get pagination
+include_with(__DIR__ . '/../includes/module/module-pagination.php', array(
+  'page' => $page,
+  'range' => $range,
+  'all_count' => $all_count,
+  'per_page' => $per_page,
+  'current_page' => $current_page,
+  'link_prefix' => $link_prefix
+));
+?>
 
-            <p>
-              <?php echo $post->getTheExcerpt(); ?>
-              <span class="cta-wrapper blue">
-                <a href="<?php echo $post->getPermalink(); ?>">View</a>
-              </span>
-            </p>
-        </li>
-      <?php endforeach; ?>
-      </ol>
-      
-      <?php else : ?>
-      <p>Sorry, no search results were found matching <strong><?php echo $_GET['s']; ?></strong>.</p>
-      <?php endif; ?>
+<?php // get blog posts
+include_with(__DIR__ . '/../includes/incl-component-post-list.php', array(
+  'page' => $page,
+  'posts' => $blog_posts,
+  'list_version' => 'stacked-version',
+  'list_column_class' => '',
+  'list_width' => STYLES_COLUMNS_MAIN_CONTENT_FULL_NARROW,
+  'list_title' => '',
+  'list_item_image_fallback' => '',
+  'list_item_show_date' => true,
+  'list_item_taxonomies' => array('category'),
+  'list_item_cta_text' => 'Read the Article'
+));
+?>
 
-      
-      <p class="panel" style="padding-bottom: 0;">
-        <span class="cta-wrapper red">
-          <a href="<?php echo PAGE_SLUG_NEWS; ?>">See all <?php echo get_the_title(PAGE_ID_NEWS); ?></a>
-        </span>
-      </p>
-      
-    </div>
-  </article>
-</div>
-    
+<?php // get pagination
+include_with(__DIR__ . '/../includes/module/module-pagination.php', array(
+  'page' => $page,
+  'range' => $range,
+  'all_count' => $all_count,
+  'per_page' => $per_page,
+  'current_page' => $current_page,
+  'link_prefix' => $link_prefix
+));
+?>
+
+<?php endif; // if blog posts ?>
 
 <?php get_footer(); ?>

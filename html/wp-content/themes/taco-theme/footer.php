@@ -49,7 +49,7 @@ $theme = AppOption::getInstance();
 
 <!-- Deferred styles https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery -->
 <noscript id="deferred-styles">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat|Quattrocento+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Quattrocento:400,700" rel="stylesheet">
 </noscript>
 
 <script>

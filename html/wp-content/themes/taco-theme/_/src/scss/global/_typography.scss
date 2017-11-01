@@ -1,25 +1,41 @@
 // example font mixins specified
 body {
-  @include default_sans_serif;
+  @include sans_serif;
+  font-weight: 400;
   line-height: 1.4;
   color: $dark_gray;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @include default_sans_serif_secondary;
+  @include sans_serif_secondary;
+  font-weight: 700;
 }
 
 
 /* special elements and typography */
 .panel-title {
   h1, h2, h3, h4, h5, h6 {
-    font-size: 1.8rem;
     @include upper;
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
   }
   @media only screen and (max-width: $breakpoint_menu_only_mobile) {
-    font-size: 1.2rem;
+    h1, h2, h3, h4, h5, h6 {
+      font-size: 1.2rem;
+      margin-bottom: 1.8rem;
+    }
   }
 }
+
 p.date {
-  @include cta_wrapper;
+  @include date_font;
+}
+
+.terms-group {
+  .label {
+    @include cta_wrapper;
+  }
+  .post-term {
+    font-size: .875rem;
+  }
 }

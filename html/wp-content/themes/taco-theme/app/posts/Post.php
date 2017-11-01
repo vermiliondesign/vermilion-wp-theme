@@ -21,6 +21,20 @@ class Post extends \Taco\Post {
   public function getDefaultOrder() {
     return 'DESC';
   }
+  
+  public function getTaxonomies() {
+    return array(
+      'category'
+    );
+  }
+  
+  /**
+   * Get all the categories
+   * @return array
+   */
+  public static function getAllCategories() {
+    return get_terms('category');
+  }
 
   // Hide extra option from left nav in admin UI
   public function getPostTypeConfig() {

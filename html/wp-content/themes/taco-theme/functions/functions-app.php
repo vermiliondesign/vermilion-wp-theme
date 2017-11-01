@@ -71,8 +71,9 @@ add_editor_style('style-wysiwyg.css');
 /**
  * Add new thumbnail size
 */
+// please note the og:image size must be at least 600 x 315 hence the special image size used for thumbnails and featured images
 if ( function_exists( 'add_image_size' ) ) {
-  // add_image_size( 'medium_square', 300, 300, true ); //(cropped)
+  add_image_size( 'medium_featured', 600, 450, true ); //(cropped)
   // add_image_size( 'midsize', 530, 450, true ); //(cropped)
 }
 
@@ -497,6 +498,72 @@ function getPostFeaturedImage($post) {
   return $post_image_url;
 }
 
+// get number of columns across based on count
+function getPostListColumnedVersionClasses($posts) {
+  $post_columns_class = "";
+  $post_width_class = STYLES_COLUMNS_MAIN_CONTENT_FULL;
+  $results = array();
+  if(count($posts) % 2 === 0) {
+    $post_columns_class = "two-across";
+    $post_width_class = STYLES_COLUMNS_MAIN_CONTENT_FULL_NARROW;
+  }
+  if(count($posts) % 3 === 0) {
+    $post_columns_class = "three-across";
+    $post_width_class = STYLES_COLUMNS_MAIN_CONTENT_FULL_WIDE;
+  }
+  $results['post_columns_class'] = $post_columns_class;
+  $results['post_width_class'] = $post_width_class;
+  return $results;
+}
+
+function getPostListCuratedTitle($posts) {
+  $title = "Latest Posts";
+  if($posts) {
+    $title = "Related Posts";
+  }
+  return $title;
+}
+
+function getLatestOrCuratedPosts($data, $default_count = 1) {
+  $posts = Post::getWhere(array(
+   'orderby' =>'post_date',
+   'order'   =>'DESC',
+   'posts_per_page' => $default_count
+  ));
+  if($data) {
+    $posts = $data;
+  }
+  return $posts;
+}
+
+function getTaxonomyLabel($name) {
+  $label = "";
+  if($name === 'category') {
+    $label = "Categories";
+  }
+  return $label;
+}
+
+function getPaginationRange($paged, $per_page, $all_count) {
+  $range = "";
+  if($paged !== 0) {
+    $first_range = ($per_page * ($paged - 1)) + 1;
+    $second_range = $per_page * $paged;
+    if($second_range > $all_count) {
+      $second_range = $all_count;
+    }
+    $range = $first_range . '-' . $second_range;
+  }
+  return $range;
+}
+
+function getFirstPageStatus($current_page) {
+  $first_page = false;
+  if($current_page === 1) {
+    $first_page = true;
+  }
+  return $first_page;
+}
 
 // render banner function
 function renderBanner($dir_path, $page) {
