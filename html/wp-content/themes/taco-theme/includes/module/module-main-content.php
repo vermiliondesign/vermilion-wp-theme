@@ -1,9 +1,9 @@
 <article>
   <?php // get the content with read more
-  $contents = explode('<!--more-->', $page->getTheContent());
+  $contents = explode('<!--more-->', $main_content->getTheContent());
   ?>
   <!-- read more -->
-  <div class="accordion-wrapper">
+  <div class="module accordion-wrapper">
     <div class="content">
       <?php echo current($contents); ?>
     </div>

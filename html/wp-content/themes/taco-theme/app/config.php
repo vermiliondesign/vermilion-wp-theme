@@ -14,3 +14,5 @@ define('STYLES_COLUMNS_MAIN_CONTENT_SIDEBAR_ARTICLE', 'columns small-12 medium-8
 define('STYLES_COLUMNS_MAIN_CONTENT_SIDEBAR_BREADCRUMB', 'columns small-12 medium-4 large-3');
 
 // page ids
+
+define('PAGE_ID_BLOG', 34);

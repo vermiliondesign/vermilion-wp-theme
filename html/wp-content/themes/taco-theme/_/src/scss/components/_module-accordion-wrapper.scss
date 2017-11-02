@@ -1,0 +1,25 @@
+/* =====     .accordion-wrapper     ===== */
+.accordion-wrapper {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  a.toggle-accordion {
+    // padding-left: 15px;
+    position: relative;
+    .status:after {
+      content: "More";
+    }
+  }
+  // don't show the more on default
+  .more-summary {
+    display: none;
+    padding-top: 1px;
+  }
+  // change language on toggle
+  &.active {
+    a.toggle-accordion .status:after {
+      content: "Less";
+    }
+  }
+}
+
+

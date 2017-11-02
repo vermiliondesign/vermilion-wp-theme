@@ -12,7 +12,7 @@ include_with(__DIR__ . '/../includes/incl-component-slider.php', array('page' =>
 ?>
 
 <?php // get main content
-include_with(__DIR__ . '/../includes/incl-component-main-content-home.php', array('page' => $page));
+include_with(__DIR__ . '/../includes/incl-page-main-content-home.php', array('page' => $page));
 ?>
 
 

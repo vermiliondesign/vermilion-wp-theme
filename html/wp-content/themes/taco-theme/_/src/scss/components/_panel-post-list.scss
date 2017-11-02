@@ -135,15 +135,3 @@
     }
   }
 }
-
-
-/* page-specific overrides */
-body.page-template-tmpl-blog,
-body.archive {
-  .panel.post-list {
-    .row {
-      width: 100%;
-      margin: 0;
-    }
-  }
-}

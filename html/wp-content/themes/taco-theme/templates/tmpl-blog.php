@@ -41,13 +41,13 @@ $first_page = getFirstPageStatus($current_page);
 
 
 <?php // get banner
-include_with(__DIR__ . '/../includes/incl-banner.php', array('page' => $page));
+include_with(__DIR__ . '/../includes/incl-page-banner.php', array('page' => $page));
 ?>
 
 
 <?php // get main content
 if($first_page) :
-include_with(__DIR__ . '/../includes/incl-component-main-content.php', array('page' => $page));
+include_with(__DIR__ . '/../includes/incl-page-main-content.php', array('page' => $page));
 endif; // only on first page
 ?>
 

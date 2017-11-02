@@ -1,3 +1,35 @@
 body.single {
   
 }
+
+/* modules specific to single */
+.post-banner {
+  h1 {
+    margin: .25rem 0 0;
+  }
+  .featured-image {
+    img {
+      display: block;
+    }
+  }
+  p.date {
+    margin: 0;
+  }
+}
+
+.share-wrapper {
+  .label,
+  ul {
+    display: inline-block
+  }
+  ul {
+    @include remove_list_styles;
+  }
+  li {
+    display: inline-block;
+  }
+  a {
+    display: inline-block;
+    padding: 5px;
+  }
+}

@@ -15,7 +15,7 @@ if($page->show_sidebar_breadcrumbs) { ?>
     <div class="<?php echo STYLES_COLUMNS_MAIN_CONTENT_SIDEBAR_ARTICLE; ?>">
       
       <?php // get main content
-      include_with(__DIR__ . '/module/module-main-content.php', array('page' => $page)); ?>
+      include_with(__DIR__ . '/module/module-main-content.php', array('main_content' => $page)); ?>
       
     </div>
 
@@ -44,7 +44,7 @@ if( strlen($page->getTheContent()) ) { ?>
     <div class="<?php echo STYLES_COLUMNS_MAIN_CONTENT_FULL_NARROW; ?>">
 
         <?php // get main content
-        include_with(__DIR__ . '/module/module-main-content.php', array('page' => $page)); ?>
+        include_with(__DIR__ . '/module/module-main-content.php', array('main_content' => $page)); ?>
       
     </div>
 

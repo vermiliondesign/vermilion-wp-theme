@@ -75,6 +75,9 @@ body.logged-in {
   margin: 0 auto;
   width: 96%;
   max-width: 72rem;
+  &.narrow {
+    max-width: 912px;
+  }
 }
 .panel {
   padding: 40px 0;

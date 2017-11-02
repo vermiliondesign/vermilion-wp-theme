@@ -73,7 +73,7 @@ add_editor_style('style-wysiwyg.css');
 */
 // please note the og:image size must be at least 600 x 315 hence the special image size used for thumbnails and featured images
 if ( function_exists( 'add_image_size' ) ) {
-  add_image_size( 'medium_featured', 600, 450, true ); //(cropped)
+  add_image_size( 'medium_featured', 600, 350, true ); //(cropped)
   // add_image_size( 'midsize', 530, 450, true ); //(cropped)
 }
 
@@ -85,7 +85,7 @@ function my_image_sizes($sizes) {
   $addsizes = array(
     "thumbnail" => __( "Thumbnail"),
     "medium" => __( "Medium"),
-    // "medium_square" => __( "Medium Square"),
+    "medium_featured" => __( "Medium Featured"),
     // "midsize" => __( "Mid-Size"),
     "large" => __( "Large"),
   );
@@ -525,13 +525,13 @@ function renderBanner($dir_path, $page) {
   $path = null;
   switch($panel_style) {
     case 'default':
-      $path = 'incl-banner-default.php';
+      $path = 'incl-page-banner-default.php';
     break;
     case 'banner_with_image':
-      $path = 'incl-banner-with-image.php';
+      $path = 'incl-page-banner-with-image.php';
     break;
     default:
-      $path = 'incl-banner-default.php';
+      $path = 'incl-page-banner-default.php';
   }
   return include_with(
      $dir_path . $path,

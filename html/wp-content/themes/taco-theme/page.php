@@ -5,11 +5,11 @@ $page = \Taco\Post\Factory::create($post);
 ?>
 
 <?php // get banner
-include_with(__DIR__ . '/includes/incl-banner.php', array('page' => $page));
+include_with(__DIR__ . '/includes/incl-page-banner.php', array('page' => $page));
 ?>
 
 <?php // get main content
-include_with(__DIR__ . '/includes/incl-component-main-content.php', array('page' => $page));
+include_with(__DIR__ . '/includes/incl-page-main-content.php', array('page' => $page));
 ?>
 
 

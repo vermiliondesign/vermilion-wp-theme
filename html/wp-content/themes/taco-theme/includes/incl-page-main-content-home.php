@@ -7,7 +7,7 @@
         <div class="<?php echo STYLES_COLUMNS_MAIN_CONTENT_FULL; ?>">
 
             <?php // get main content
-            include_with(__DIR__ . '/module/module-main-content.php', array('page' => $page)); ?>
+            include_with(__DIR__ . '/module/module-main-content.php', array('main_content' => $page)); ?>
           
         </div>
 

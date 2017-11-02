@@ -30,25 +30,22 @@ header {
     }
   }
 }
-p.date {
+
+p.date,
+p.back-button {
   @include date_font;
 }
 
-.post-terms {
+.post-terms,
+.share-wrapper {
   .label {
     @include cta_wrapper;
   }
-  .post-term {
-    font-size: .875rem;
-  }
 }
 
-.list-as-dropdown {
-  @include sans_serif_secondary;
-  font-size: .875rem;
-}
-
+.post-terms,
+.list-as-dropdown,
 .post-pagination {
-  @include sans_serif_secondary;
   font-size: .875rem;
+  @include sans_serif_secondary;
 }

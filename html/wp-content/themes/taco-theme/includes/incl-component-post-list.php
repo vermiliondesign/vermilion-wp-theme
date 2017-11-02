@@ -22,7 +22,7 @@
         <?php foreach($posts as $post) {
           
         // get featured image or set fallback
-        $post_image_url = ( strlen(Post::getPostFeaturedImage($post)) ) ? Post::getPostFeaturedImage($post) : $list_item_image_fallback;
+        $post_image_url = ( strlen(Post::getPostFeaturedImage($post, 'medium')) ) ? Post::getPostFeaturedImage($post, 'medium') : $list_item_image_fallback;
         ?>
         
         <?php

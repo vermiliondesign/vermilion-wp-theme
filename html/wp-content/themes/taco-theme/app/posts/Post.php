@@ -1,9 +1,13 @@
 <?php
 
 class Post extends \Taco\Post {
+  
+  use \Taco\AddMany\Mixins;
 
   public function getFields() {
-    return array();
+    return array(
+      'related_posts' => \Taco\AddMany\Factory::createWithAddBySearch('Post', null, [])->toArray(),
+    );
   }
 
   public function getSingular() {
@@ -28,11 +32,11 @@ class Post extends \Taco\Post {
     );
   }
   
-  public function getPostFeaturedImage($post) {
+  public function getPostFeaturedImage($post, $size) {
     $post_image_bool = has_post_thumbnail($post->ID);
     $post_image_url = "";
     if($post_image_bool) {
-        $post_image_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
+        $post_image_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $size );
         $post_image_url = $post_image_url[0];
     }
     return $post_image_url;

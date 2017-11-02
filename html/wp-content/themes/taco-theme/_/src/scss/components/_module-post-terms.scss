@@ -2,6 +2,7 @@
   .label,
   ul {
     display: inline-block;
+    @include remove_list_styles;
   }
   li {
     display: inline-block;
