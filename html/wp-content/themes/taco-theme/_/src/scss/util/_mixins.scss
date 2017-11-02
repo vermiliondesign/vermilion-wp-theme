@@ -86,3 +86,50 @@
 }
 
 /* CUSTOM MIXINS BASED ON THIS THEME */
+// disc full
+@mixin content_li_first {
+  @include pseudo_element;
+  @include fontawesome;
+  line-height: 1.7;
+  font-size: .5rem;
+  top: 5px;
+  left: -22px;
+  content: "\f111";
+}
+// disc open
+@mixin content_li_second {
+  @include pseudo_element;
+  @include fontawesome;
+  line-height: 1.7;
+  font-size: .55rem;
+  top: 8px;
+  left: -22px;
+  content: "\f10c";
+}
+// square
+@mixin content_li_third {
+  @include sans_serif;
+  top: 12px;
+  content: "\25aa";
+  font-size: 1.3rem;
+  line-height: .1rem;
+}
+// square
+@mixin content_li_fourth {
+  @include sans_serif;
+  top: 12px;
+  content: "\25aa";
+  font-size: 1.3rem;
+  line-height: .1rem;
+}
+
+// you need to make sure to include the counter-reset: li-counter; on the ol this li:before
+@mixin content_li_numbers {
+  @include pseudo_element;
+  top: 0.17rem;
+  left: -22px;
+  @include sans_serif_secondary;
+  font-weight: 700;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}

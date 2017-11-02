@@ -104,13 +104,13 @@ nav {
             &:focus,
             &:hover,
             &:active {
-              background: $lightest_gray;
+              background: mix(white, $lightest_gray, 50%);
             }
           }
           // active states
           &.current-menu-item {
             > a {
-              background: white;
+              background: mix(white, $lightest_gray, 50%);
               color: $dark_red;
             }
           }

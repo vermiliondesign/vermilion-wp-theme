@@ -116,21 +116,105 @@ footer {
 .content {
   a {
     text-decoration: underline;
-
     &:link,
     &:visited {
-
+      color: $red;
     }
     &:focus,
     &:hover,
     &:active {
-
+      color: $dark_red;
     }
   }
+  h1, h2, h3, h4, h5, h6 {
+    margin: 1.35rem 0 .5rem;
+  }
   blockquote {
-    p {
+    margin: 1rem 2rem 1rem 1.5rem;
+  }
+  p {
+    margin: .75rem 0;
+  }
+  p, li {
+    line-height: 1.7;
+  }
+  // custom bullets and numbers
+  ul, ol {
+    @include remove_list_styles;
+    padding-left: 22px;
+    margin: 1.125rem 0;
+  }
+  ul ul,
+  ol ol,
+  ul ol,
+  ol ul {
+    margin: 0;
+  }
+  ul {
+    li {
+      position: relative;
+      &:before {
+        @include content_li_first;
+      }
     }
-    em {
+    li ul li {
+      &:before {
+        @include content_li_second;
+      }
+    }
+    li li li {
+      &:before {
+        @include content_li_third;
+      }
+    }
+    li li li li {
+      &:before {
+        @include content_li_fourth;
+      }
+    }
+    li ol,
+    li li ol {
+      counter-reset: ul-li-counter;
+    }
+    li ol li,
+    li li ol li {
+      &:before {
+        @include content_li_numbers;
+        content: counter(ul-li-counter) ".";
+        counter-increment: ul-li-counter;
+      }
+    }
+  }
+  ol {
+    counter-reset: li-counter;
+    li {
+      position: relative;
+      &:before {
+        @include content_li_numbers;
+        content: counter(li-counter) ".";
+        counter-increment: li-counter;
+      }
+      ul li {
+        &:before {
+          display: none;
+          @include pseudo_element;
+          @include fontawesome;
+          line-height: 1.7;
+          font-size: .5rem;
+          top: 7px;
+          left: -22px;
+          content: "\f111";
+        }
+      }
+    }
+    ol {
+      counter-reset: li-counter;
+      li {
+        &:before {
+          content: counter(li-counter) ".";
+          counter-increment: li-counter;
+        }
+      }
     }
   }
 }

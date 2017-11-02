@@ -5,9 +5,10 @@ import '../scss/main.scss';
 // get libraries
 require('flexslider');
 require('jquery-lazyload');
+require('sass-to-js/js/dist/sass-to-js.min.js');
 
-/* Pages */
-import './pages/sample-page.js';
+/* utils */
+import './util/smooth-scroll.js';
 
 /* components */
 import vermilionMobileHeader from './components/header.js';
@@ -16,13 +17,14 @@ import themeSlider from './components/slider.js';
 import listAsDropdown from './components/list-as-dropdown.js';
 
 
-/* Global Functions */
-//import './util/smooth-scroll.js';
-
 // init when doc is ready
 $(function() {
+  
+  // bigger components
   vermilionMobileHeader();
   vermilionThemeFeatures();
   themeSlider('.slider-container .flexslider');
+  
+  // smaller components
   listAsDropdown();
 });

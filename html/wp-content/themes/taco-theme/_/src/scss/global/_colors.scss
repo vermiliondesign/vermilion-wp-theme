@@ -7,23 +7,16 @@ $dark_red : #71120d;
 // neutrals
 $lightest_gray : #cccccc;
 $light_gray : #b5b5b5;
-$dark_gray : #333;
 $gray : #666;
+$dark_gray : #333;
+
 
 // sample page colorwheel
-$colors: (
-  'white': #fff,
-  'black': #000
+$colorwheel: (
+  'red': #e2231a,
+  'dark_red': #71120d,
+  'lightest_gray' : #cccccc,
+  'light_gray' : #b5b5b5,
+  'gray' : #666,
+  'dark_gray' : #333
 );
-
-@function color($color) {
-  @return map-get($colors, $color);
-}
-
-// Define global color classes here
-@each $color_name, $color_value in $colors {
-  .bg-#{$color_name} {
-    background-color: color($color_name);
-    border-color: color($color_name);
-  }
-}
