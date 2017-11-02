@@ -10,8 +10,9 @@ require('jquery-lazyload');
 import './pages/sample-page.js';
 
 /* components */
-import themeSlider from './components/slider.js';
 import vermilionMobileHeader from './components/header.js';
+import themeSlider from './components/slider.js';
+import listAsDropdown from './components/list-as-dropdown.js';
 
 
 /* Global Functions */
@@ -21,4 +22,5 @@ import './util/smooth-scroll.js';
 $(function() {
   vermilionMobileHeader();
   themeSlider('.slider-container .flexslider');
+  listAsDropdown();
 });

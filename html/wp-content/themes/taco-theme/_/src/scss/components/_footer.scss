@@ -1,7 +1,6 @@
 footer {
   background: $light_gray;
   .footer-menu-wrapper {
-    text-align: right;
     ul {
       @include clearfix;
       display: inline-block;

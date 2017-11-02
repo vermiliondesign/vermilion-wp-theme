@@ -5,9 +5,10 @@ $terms = array_filter($terms, function($term) {
   // Remove 'Uncategorized'
   return ($term->name !== 'Uncategorized');
 });
+
 ?>
 <?php if(Arr::iterable($terms)) { ?>
-<div class="module terms-group">
+<div class="module post-terms">
   <span class="label"><?php echo getTaxonomyLabel($taxonomy->name); ?>:</span>&nbsp;
   <ul>
   <?php foreach($terms as $term) { ?>

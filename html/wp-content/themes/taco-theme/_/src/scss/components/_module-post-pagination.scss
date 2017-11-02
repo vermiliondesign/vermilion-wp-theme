@@ -1,0 +1,37 @@
+.module.post-pagination {
+  width: 100%;
+  table-layout: fixed;
+  .cell {
+    vertical-align: middle;
+  }
+  .pagination {
+    text-align: right;
+    ol {
+      @include remove_list_styles;
+      display: inline-block;
+    }
+    li {
+      display: inline-block;
+      margin-right: 5px;
+      a {
+        display: inline-block;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        padding-top: 2px;
+        text-align: center;
+        @include border_radius(50%);
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+      &.on,
+      &:hover {
+        a {
+          background: $red;
+          color: white;
+        }
+      }
+    }
+  }
+}

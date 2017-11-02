@@ -39,4 +39,10 @@
     </div>
   </div>
 </div>
-<?php } // if iterable ?>
+<?php } else { // no posts ?>
+<div class="panel">
+  <div class="row panel-title center">
+    <p>No post results.</p>
+  </div>
+</div>
+<?php } // end if ?>

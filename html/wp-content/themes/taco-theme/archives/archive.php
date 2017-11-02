@@ -55,46 +55,67 @@ $range = getPaginationRange($paged, $per_page, $all_count);
 </div>
 
 
-<?php // get blog posts
-if(Arr::iterable($blog_posts)) : ?>
+<div class="panel main-content has-sidebar">
 
-<?php // get pagination
-include_with(__DIR__ . '/../includes/module/module-pagination.php', array(
-  'page' => $page,
-  'range' => $range,
-  'all_count' => $all_count,
-  'per_page' => $per_page,
-  'current_page' => $current_page,
-  'link_prefix' => $link_prefix
-));
-?>
+  <div class="row">
+        
+    <div class="<?php echo STYLES_COLUMNS_MAIN_CONTENT_SIDEBAR_ARTICLE; ?>">
+      
+      <?php // get pagination
+      include_with(__DIR__ . '/../includes/module/module-pagination.php', array(
+        'page' => $page,
+        'range' => $range,
+        'all_count' => $all_count,
+        'per_page' => $per_page,
+        'current_page' => $current_page,
+        'link_prefix' => $link_prefix
+      ));
+      ?>
 
-<?php // get blog posts
-include_with(__DIR__ . '/../includes/incl-component-post-list.php', array(
-  'page' => $page,
-  'posts' => $blog_posts,
-  'list_version' => 'stacked-version',
-  'list_column_class' => '',
-  'list_width' => STYLES_COLUMNS_MAIN_CONTENT_FULL_NARROW,
-  'list_title' => '',
-  'list_item_image_fallback' => '',
-  'list_item_show_date' => true,
-  'list_item_taxonomies' => array('category'),
-  'list_item_cta_text' => 'Read the Article'
-));
-?>
 
-<?php // get pagination
-include_with(__DIR__ . '/../includes/module/module-pagination.php', array(
-  'page' => $page,
-  'range' => $range,
-  'all_count' => $all_count,
-  'per_page' => $per_page,
-  'current_page' => $current_page,
-  'link_prefix' => $link_prefix
-));
-?>
+      <?php // get blog posts
+      include_with(__DIR__ . '/../includes/incl-component-post-list.php', array(
+        'page' => $page,
+        'posts' => $blog_posts,
+        'list_version' => 'stacked-version',
+        'list_column_class' => '',
+        'list_width' => '',
+        'list_title' => '',
+        'list_item_image_fallback' => '',
+        'list_item_show_date' => true,
+        'list_item_taxonomies' => array('category'),
+        'list_item_cta_text' => 'Read the Article',
+      ));
+      ?>
 
-<?php endif; // if blog posts ?>
+      <?php // get pagination
+      include_with(__DIR__ . '/../includes/module/module-pagination.php', array(
+        'page' => $page,
+        'range' => $range,
+        'all_count' => $all_count,
+        'per_page' => $per_page,
+        'current_page' => $current_page,
+        'link_prefix' => $link_prefix
+      ));
+      ?>
+      
+    </div>
+
+    <div class="<?php echo STYLES_COLUMNS_MAIN_CONTENT_SIDEBAR_BREADCRUMB; ?>">
+      
+      <?php // get pagination
+      include_with(__DIR__ . '/../sidebar-blog.php', array(
+        'page' => $page,
+        'categories' => $categories,
+        'category_slug' => $category_slug
+      ));
+      ?>
+      
+      
+    </div>
+        
+  </div><!-- /.row -->
+
+</div><!--/.main-content -->
 
 <?php get_footer(); ?>

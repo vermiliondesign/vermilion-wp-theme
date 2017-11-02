@@ -13,6 +13,10 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* special elements and typography */
+header {
+  @include sans_serif_secondary;
+}
+
 .panel-title {
   h1, h2, h3, h4, h5, h6 {
     @include upper;
@@ -26,16 +30,25 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
 }
-
 p.date {
   @include date_font;
 }
 
-.terms-group {
+.post-terms {
   .label {
     @include cta_wrapper;
   }
   .post-term {
     font-size: .875rem;
   }
+}
+
+.list-as-dropdown {
+  @include sans_serif_secondary;
+  font-size: .875rem;
+}
+
+.post-pagination {
+  @include sans_serif_secondary;
+  font-size: .875rem;
 }

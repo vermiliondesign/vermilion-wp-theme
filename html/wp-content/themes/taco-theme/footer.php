@@ -13,6 +13,18 @@ $theme = AppOption::getInstance();
 <footer class="panel">
   <div class="row">
     <div class="columns small-12 medium-6">
+      <div class="footer-menu-wrapper">
+        <?php if(has_nav_menu('menu_footer')) {
+          wp_nav_menu( array(
+            'theme_location' => 'menu_footer',
+            'container' => false,
+            'walker'=> new Arrow_Walker_Nav_Menu()
+          ) );
+        }
+        ?>
+      </div>
+    </div>
+    <div class="columns small-12 medium-6" style="text-align: right;">
       <a href="<?php echo get_home_url(); ?>" class="logo">
         <img src="https://placehold.it/150x70" alt="<?php echo get_bloginfo('name'); ?>">
       </a>
@@ -28,18 +40,6 @@ $theme = AppOption::getInstance();
           </a>
         </li>
       </ul>
-    </div>
-    <div class="columns small-12 medium-6">
-      <div class="footer-menu-wrapper">
-        <?php if(has_nav_menu('menu_footer')) {
-          wp_nav_menu( array(
-            'theme_location' => 'menu_footer',
-            'container' => false,
-            'walker'=> new Arrow_Walker_Nav_Menu()
-          ) );
-        }
-        ?>
-      </div>
     </div>
   </div>
 </footer>

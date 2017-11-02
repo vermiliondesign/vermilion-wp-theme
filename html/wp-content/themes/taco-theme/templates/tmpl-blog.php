@@ -28,6 +28,12 @@ $link_prefix = '/blog';
 $all_count = (Post::getCount() - count($featured_posts));
 $range = getPaginationRange($paged, $per_page, $all_count);
 
+// get all categories
+$categories = Post::getAllCategories();
+$categories = array_filter($categories, function($category) {
+  // Remove 'Uncategorized' category
+  return ($category->name !== 'Uncategorized');
+});
 
 // setup first page var
 $first_page = getFirstPageStatus($current_page);
@@ -61,49 +67,75 @@ include_with(__DIR__ . '/../includes/incl-component-post-list.php', array(
   'list_title' => Page::getCuratedTitleFeaturedPost($page->featured_posts),
   'list_item_image_fallback' => get_asset_path('_/img/post-placeholder-600x450.jpg'),
   'list_item_show_date' => true,
-  'list_item_taxonomies' => false,
+  'list_item_taxonomies' => array('category'),
   'list_item_cta_text' => 'Read the Article'
 ));
 endif; // only on first page
 ?>
 
-<?php // get pagination
-include_with(__DIR__ . '/../includes/module/module-pagination.php', array(
-  'page' => $page,
-  'range' => $range,
-  'all_count' => $all_count,
-  'per_page' => $per_page,
-  'current_page' => $current_page,
-  'link_prefix' => $link_prefix
-));
-?>
+<div class="panel main-content has-sidebar">
+
+  <div class="row">
+        
+    <div class="<?php echo STYLES_COLUMNS_MAIN_CONTENT_SIDEBAR_ARTICLE; ?>">
+      
+      <?php // get pagination
+      include_with(__DIR__ . '/../includes/module/module-pagination.php', array(
+        'page' => $page,
+        'range' => $range,
+        'all_count' => $all_count,
+        'per_page' => $per_page,
+        'current_page' => $current_page,
+        'link_prefix' => $link_prefix
+      ));
+      ?>
 
 
-<?php // get blog posts
-include_with(__DIR__ . '/../includes/incl-component-post-list.php', array(
-  'page' => $page,
-  'posts' => $blog_posts,
-  'list_version' => 'stacked-version',
-  'list_column_class' => '',
-  'list_width' => STYLES_COLUMNS_MAIN_CONTENT_FULL_NARROW,
-  'list_title' => '',
-  'list_item_image_fallback' => '',
-  'list_item_show_date' => true,
-  'list_item_taxonomies' => array('category'),
-  'list_item_cta_text' => 'Read the Article'
-));
-?>
+      <?php // get blog posts
+      include_with(__DIR__ . '/../includes/incl-component-post-list.php', array(
+        'page' => $page,
+        'posts' => $blog_posts,
+        'list_version' => 'stacked-version',
+        'list_column_class' => '',
+        'list_width' => '',
+        'list_title' => '',
+        'list_item_image_fallback' => '',
+        'list_item_show_date' => true,
+        'list_item_taxonomies' => array('category'),
+        'list_item_cta_text' => 'Read the Article'
+      ));
+      ?>
 
-<?php // get pagination
-include_with(__DIR__ . '/../includes/module/module-pagination.php', array(
-  'page' => $page,
-  'range' => $range,
-  'all_count' => $all_count,
-  'per_page' => $per_page,
-  'current_page' => $current_page,
-  'link_prefix' => $link_prefix
-));
-?>
+      <?php // get pagination
+      include_with(__DIR__ . '/../includes/module/module-pagination.php', array(
+        'page' => $page,
+        'range' => $range,
+        'all_count' => $all_count,
+        'per_page' => $per_page,
+        'current_page' => $current_page,
+        'link_prefix' => $link_prefix
+      ));
+      ?>
+      
+    </div>
+
+    <div class="<?php echo STYLES_COLUMNS_MAIN_CONTENT_SIDEBAR_BREADCRUMB; ?>">
+      
+      <?php // get pagination
+      include_with(__DIR__ . '/../sidebar-blog.php', array(
+        'page' => $page,
+        'categories' => $categories
+      ));
+      ?>
+      
+      
+    </div>
+        
+  </div><!-- /.row -->
+
+</div><!--/.main-content -->
+
+
 
 <?php endif; // if blog posts ?>
 

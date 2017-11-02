@@ -7,12 +7,17 @@
   .subtitle {
     @include sans_serif_secondary;
     font-size: 1.5rem;
-    margin: .25rem 0 .5rem;
+    margin: .25rem 0 0;
   }
 }
 
 .banner.default {
-  
+  .table {
+    height: 200px;
+  }
+  .cell {
+    vertical-align: middle;
+  }
 }
 
 .banner.with-image {

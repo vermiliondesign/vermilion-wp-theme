@@ -1,0 +1,83 @@
+.module.list-as-dropdown {
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+  a {
+    text-decoration: none !important;
+  }
+  a.active-archive {
+    display: block;
+    color: $gray;
+    border: solid 1px $lightest_gray;
+    padding: 10px 12px;
+    @include cta_wrapper;
+    .arrow {
+      margin-left: 5px;
+    }
+  }
+  ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 15;
+    width: 100%;
+    background: white;
+    text-align: left;
+    max-height: 340px;
+    overflow: scroll;
+    border-left: solid 1px $lightest_gray;
+    border-bottom: solid 1px $lightest_gray;
+    border-right: solid 1px $lightest_gray;
+    opacity: 0;
+    margin: 0;
+    padding:0;
+    &.active {
+      opacity: 1;
+    }
+    a {
+      color: $red;
+      &:hover,
+      &:focus {
+        color: $dark_red;
+        @include box_shadow(inset 0 0 5px $lightest_gray);
+      }
+    }
+    li {
+      display: block !important;
+      a {
+        display: block;
+        border-bottom: solid 1px $lightest_gray;
+        padding: 10px 12px;
+      }
+      // used on the current list item
+      &.active {
+        
+        a,
+        a:link,
+        a:visited,
+        a:hover,
+        a:active {
+          cursor: default;
+          color: $dark_red;
+          @include box_shadow(inset 0 0 5px $lightest_gray);
+        }
+      }
+    }
+    li:last-child {
+      a {
+        border-bottom: none;
+      }
+    }
+    &:active {
+      a.active-archive {
+        background: $lightest_gray;
+      }
+    }
+  }
+  &.active {
+    a.active-archive {
+      background: mix(white, $lightest_gray, 50%);
+    }
+  }
+}
+

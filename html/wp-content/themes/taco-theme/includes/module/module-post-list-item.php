@@ -34,7 +34,7 @@
         
         include_with(__DIR__ . '/module-post-list-item-terms.php', array(
           'post' => $post,
-          'taxonomy' => $taxonomy
+          'taxonomy' => $taxonomy,
         ));
       } // foreach taxonomy
     } // if taxonomies iterable ?>
