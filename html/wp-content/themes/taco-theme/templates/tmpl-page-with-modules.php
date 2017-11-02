@@ -6,7 +6,7 @@ $page = \Taco\Post\Factory::create($post);
 // check for related pages
 $related_pages = $page->related_pages;
 // check for related posts
-$related_posts = getLatestOrCuratedPosts($page->related_posts, 3);
+$related_posts = Page::getPostsLatestOrCurated($page->related_posts, 3);
 
 ?>
 
@@ -45,9 +45,9 @@ include_with(__DIR__ . '/../includes/incl-component-post-list.php', array(
   'page' => $page,
   'posts' => $related_posts,
   'list_version' => 'columned-version',
-  'list_column_class' => getPostListColumnedVersionClasses($related_posts)['post_columns_class'],
-  'list_width' => getPostListColumnedVersionClasses($related_posts)['post_width_class'],
-  'list_title' => getPostListCuratedTitle($page->related_posts),
+  'list_column_class' => Page::getPostListColumnedVersionClasses($related_posts)['post_columns_class'],
+  'list_width' => Page::getPostListColumnedVersionClasses($related_posts)['post_width_class'],
+  'list_title' => Page::getCuratedTitlePostList($page->related_posts),
   'list_item_image_fallback' => get_asset_path('_/img/post-placeholder-600x450.jpg'),
   'list_item_show_date' => true,
   'list_item_taxonomies' => false,

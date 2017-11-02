@@ -487,55 +487,6 @@ if (function_exists('prune_super_cache')) {
   add_action( 'save_post', 'wp_super_cache_clear_cache' );
 }
 
-// get page/post featured image
-function getPostFeaturedImage($post) {
-  $post_image_bool = has_post_thumbnail($post->ID);
-  $post_image_url = "";
-  if($post_image_bool) {
-      $post_image_url = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
-      $post_image_url = $post_image_url[0];
-  }
-  return $post_image_url;
-}
-
-// get number of columns across based on count
-function getPostListColumnedVersionClasses($posts) {
-  $post_columns_class = "";
-  $post_width_class = STYLES_COLUMNS_MAIN_CONTENT_FULL;
-  $results = array();
-  if(count($posts) % 2 === 0) {
-    $post_columns_class = "two-across";
-    $post_width_class = STYLES_COLUMNS_MAIN_CONTENT_FULL_NARROW;
-  }
-  if(count($posts) % 3 === 0) {
-    $post_columns_class = "three-across";
-    $post_width_class = STYLES_COLUMNS_MAIN_CONTENT_FULL_WIDE;
-  }
-  $results['post_columns_class'] = $post_columns_class;
-  $results['post_width_class'] = $post_width_class;
-  return $results;
-}
-
-function getPostListCuratedTitle($posts) {
-  $title = "Latest Posts";
-  if($posts) {
-    $title = "Related Posts";
-  }
-  return $title;
-}
-
-function getLatestOrCuratedPosts($data, $default_count = 1) {
-  $posts = Post::getWhere(array(
-   'orderby' =>'post_date',
-   'order'   =>'DESC',
-   'posts_per_page' => $default_count
-  ));
-  if($data) {
-    $posts = $data;
-  }
-  return $posts;
-}
-
 function getTaxonomyLabel($name) {
   $label = "";
   if($name === 'category') {

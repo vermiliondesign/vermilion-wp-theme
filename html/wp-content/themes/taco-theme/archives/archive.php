@@ -16,7 +16,7 @@ $category_title = $category->name; // Same as single_tag_title()
 $category_slug  = $category->slug;
 $category_id  = $category->term_id;
 $category_taxonomy = $category->taxonomy;
-$category_taxonomy_title = $category_taxonomy;
+// $category_taxonomy_title = $category_taxonomy;
 
 // taxonomies
 // categories
@@ -44,6 +44,11 @@ $range = getPaginationRange($paged, $per_page, $all_count);
     <div class="row">
       <div class="<?php echo STYLES_COLUMNS_MAIN_CONTENT_FULL; ?>">
         <h1>Archive</h1>
+        <p class="subtitle">
+          <?php echo get_taxonomy($category_taxonomy)->label; ?>
+          <i class="fa fa-angle-right"></i>
+          <?php echo $category_title; ?>
+        </p>
       </div>
     </div>
   </div>

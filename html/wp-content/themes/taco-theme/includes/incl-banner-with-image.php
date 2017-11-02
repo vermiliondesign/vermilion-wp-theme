@@ -7,7 +7,7 @@ $banner_image = ($page->banner_image) ? $page->banner_image : get_asset_path('_/
 
       <h1><?php echo $page->getTheTitle(); ?></h1>
       <?php if($page->banner_subtitle) { ?>
-      <p><?php echo nl2br($page->banner_subtitle); ?></p>
+      <p class="subtitle"><?php echo nl2br($page->banner_subtitle); ?></p>
       <?php } ?>
 
     </div>

@@ -55,6 +55,9 @@ class Page extends \Taco\Post {
     $template_fields = [];
     
     switch($template_file_name) {
+      case 'templates/tmpl-blog.php':
+        $template_fields = $this->getFeaturedPostsFields();
+      break;
       case 'templates/tmpl-home.php':
         $template_fields = $this->getHomeFields();
       break;
@@ -103,6 +106,12 @@ class Page extends \Taco\Post {
     $template_boxes = [];
 
     switch ($template_file_name) {
+      
+      case 'templates/tmpl-blog.php':
+        $template_boxes = [
+          'Blog' => array_keys($this->getFeaturedPostsFields()),
+        ];
+      break;
       case 'templates/tmpl-home.php':
         $template_boxes = [
           'Home' => array_keys($this->getHomeFields()),
@@ -189,6 +198,12 @@ class Page extends \Taco\Post {
     ];
   }
   
+  public function getFeaturedPostsFields() {
+    return [
+      'featured_posts' => \Taco\AddMany\Factory::createWithAddBySearch('Post', null, [])->toArray(),
+    ];
+  }
+  
   /* used in sidebar breadcrumbs */
   public static function getBreadcrumbVars($page) {
 
@@ -248,6 +263,52 @@ class Page extends \Taco\Post {
       return self::getTopAncestor($current->post_parent);
     }
   }
+  
+  public function getCuratedTitlePostList($posts) {
+    $title = "Latest Posts";
+    if($posts) {
+      $title = "Related Posts";
+    }
+    return $title;
+  }
+  
+  public function getCuratedTitleFeaturedPost($posts) {
+    $title = "Most Recent";
+    if($posts) {
+      $title = "Featured Posts";
+    }
+    return $title;
+  }
+  
+  public function getPostListColumnedVersionClasses($posts) {
+    $post_columns_class = "";
+    $post_width_class = STYLES_COLUMNS_MAIN_CONTENT_FULL;
+    $results = array();
+    if(count($posts) % 2 === 0) {
+      $post_columns_class = "two-across";
+      $post_width_class = STYLES_COLUMNS_MAIN_CONTENT_FULL_NARROW;
+    }
+    if(count($posts) % 3 === 0) {
+      $post_columns_class = "three-across";
+      $post_width_class = STYLES_COLUMNS_MAIN_CONTENT_FULL_WIDE;
+    }
+    $results['post_columns_class'] = $post_columns_class;
+    $results['post_width_class'] = $post_width_class;
+    return $results;
+  }
+  
+  public function getPostsLatestOrCurated($data, $default_count = 1) {
+    $posts = Post::getWhere(array(
+     'orderby' =>'post_date',
+     'order'   =>'DESC',
+     'posts_per_page' => $default_count
+    ));
+    if($data) {
+      $posts = $data;
+    }
+    return $posts;
+  }
+  
   
 
     /**
