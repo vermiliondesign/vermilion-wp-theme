@@ -41,7 +41,7 @@ var vermilionThemeFeatures = function() {
       e.preventDefault();
       $(this).parents('.accordion-wrapper').find('.more-summary').slideToggle();
       $(this).parents('.accordion-wrapper').toggleClass('active');
-      $(this).parents('.accordion-wrapper').find('i').toggleClass('icon-angle-down icon-angle-up');
+      $(this).parents('.accordion-wrapper').find('i').toggleClass('fa-angle-down fa-angle-up');
     });
   };
   // init toggle accordion

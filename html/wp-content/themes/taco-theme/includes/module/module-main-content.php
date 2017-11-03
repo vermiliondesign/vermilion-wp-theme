@@ -12,7 +12,7 @@
     if(count($contents) > 1): ?>
     <span class="cta-wrapper-accordion">
       <a class="toggle-accordion" href="javascript:void(0)">Read <span class="status"></span>&nbsp;
-        <i class="icon-angle-down"></i>
+        <i class="fa fa-angle-down"></i>
       </a>
     </span>
       <div class="more-summary content">

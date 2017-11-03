@@ -27,56 +27,18 @@ function add_theme_colors_before_init( $settings ) {
         array(
             'title' => 'CTA Wrapper',
             'inline' => 'span',
-            'classes' => 'cta-wrapper yellow',
+            'classes' => 'cta-wrapper',
             'wrapper' => true,
         ),
         array(
-            'title' => 'CTA Wrapper - Red',
-            'inline' => 'span',
-            'classes' => 'cta-wrapper red',
-            'wrapper' => true,
+            'title' => 'Accordion List for Desc. (use H4 as Title and indented li as Desc.)',
+            'selector' => 'ul, ol',
+            'classes' => 'wysiwyg-accordion-list',
         ),
         array(
-            'title' => 'CTA Wrapper - Blue',
-            'inline' => 'span',
-            'classes' => 'cta-wrapper blue',
-            'wrapper' => true,
-        ),
-        array(
-            'title' => 'Font - Caption',
-            'block' => 'div',
-            'classes' => 'caption',
-            'wrapper' => true,
-        ),
-        array(
-            'title' => 'Font - Heading XLarge',
-            'block' => 'div',
-            'classes' => 'heading-xlarge',
-            'wrapper' => true,
-        ),
-        array(
-            'title' => 'Font - Heading Secondary - Bold',
-            'block' => 'div',
-            'classes' => 'heading-secondary-bold',
-            'wrapper' => true,
-        ),
-        array(
-            'title' => 'Font - Heading Secondary - Regular',
-            'block' => 'div',
-            'classes' => 'heading-secondary',
-            'wrapper' => true,
-        ),
-        array(
-            'title' => 'Font - Heading Tertiary - Upper',
-            'block' => 'div',
-            'classes' => 'heading-tertiary-upper',
-            'wrapper' => true,
-        ),
-        array(
-            'title' => 'Font - Heading Tertiary',
-            'block' => 'div',
-            'classes' => 'heading-tertiary',
-            'wrapper' => true,
+            'title' => 'Accordion List for Bullets (use H4 as Title and indented li as Bullets)',
+            'selector' => 'ul, ol',
+            'classes' => 'wysiwyg-accordion-list-with-bullets',
         ),
     );
  

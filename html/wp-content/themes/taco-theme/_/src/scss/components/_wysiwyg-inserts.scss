@@ -1,0 +1,113 @@
+/* INTERACTIVE ACCORDION LIST */
+// faq_accordion for interaction
+.content ul.wysiwyg-accordion-list,
+.content ol.wysiwyg-accordion-list,
+.content ul.wysiwyg-accordion-list-with-bullets,
+.content ol.wysiwyg-accordion-list-with-bullets {
+  @include remove_list_styles;
+  > li {
+    border-bottom: solid 1px $lightest_gray;
+    margin-bottom: 5px;
+    &:before {
+      display: none;
+    }
+    > h4 {
+      position: relative;
+      margin: 0;
+      padding: 10px 0 15px;
+      padding-right: 60px;
+      cursor: pointer;
+      // font-weight: 400;
+      // .fa-chevron-down
+      color: $red;
+      &:after {
+        @include pseudo_element;
+        @include fontawesome;
+        top: 6px;
+        padding-top: 4px;
+        right: 0;
+        width: 40px;
+        height: 40px;
+        // background: green;
+        content: "\f078";
+        text-align: center;
+      }
+      // .fa-chevron-up
+      &.active {
+        color: $dark_red;
+        &:after {
+          content: "\f077";
+        }
+      }
+    }
+  }
+  > li > ul {
+    padding-bottom: 15px;
+    // font-size: 1rem;
+    padding-right: 40px;
+    padding-left: 0;
+    ul {
+      padding-left: 22px;
+    }
+  }
+  ul ul {
+    margin: .25rem 0;
+  }
+  li li {
+    &:before {
+      display: none;
+    }
+  }
+  // BULLET STYLES AFTER DESCRIPTION
+  li li li {
+    &:before {
+      @include content_li_first;
+    }
+  }
+  li li li li {
+    &:before {
+      @include content_li_second;
+    }
+  }
+  li li li li li {
+    &:before {
+      @include content_li_third;
+    }
+  }
+  li li li li li li {
+    &:before {
+      @include content_li_fourth;
+    }
+  }
+}
+
+.content ul.wysiwyg-accordion-list-with-bullets {
+  > li {
+    > ul {
+      padding-left: 22px;
+      > li:before {
+        display: block;
+      }
+    }
+  }
+  li li {
+    &:before {
+      @include content_li_first;
+    }
+  }
+  li li li {
+    &:before {
+      @include content_li_second;
+    }
+  }
+  li li li li {
+    &:before {
+      @include content_li_third;
+    }
+  }
+  li li li li li {
+    &:before {
+      @include content_li_fourth;
+    }
+  }
+}

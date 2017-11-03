@@ -1,0 +1,33 @@
+.module.sidebar-breadcrumb {
+  a {
+    text-decoration: none;
+  }
+  p.ancestor {
+    @include cta_wrapper;
+  }
+  li {
+    color: $red;
+    &:hover {
+      color: $dark_red;
+    }
+  }
+  li.current_page_item {
+    cursor: default;
+    color: $dark_red;
+    > a,
+    > a:link,
+    > a:visited,
+    > a:focus,
+    > a:hover,
+    > a:active {
+      color: $dark_red;
+    }
+  }
+  h2 {
+    a {
+      &.active {
+        color: $dark_red;
+      }
+    }
+  }
+}

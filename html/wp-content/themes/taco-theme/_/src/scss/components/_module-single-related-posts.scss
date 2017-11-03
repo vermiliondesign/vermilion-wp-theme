@@ -1,0 +1,11 @@
+.module.single-related-posts {
+  a {
+    text-decoration: none;
+  }
+  li {
+    color: $red;
+    &:hover {
+      color: $dark_red;
+    }
+  }
+}

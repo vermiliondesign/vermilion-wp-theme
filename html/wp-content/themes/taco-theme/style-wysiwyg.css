@@ -1,4 +1,6 @@
 /* any elements in the wysiwyg to style when they are custom formatted */
-body#tinymce .cta-wrapper {
+body#tinymce .cta-wrapper,
+body#tinymce .wysiwyg-accordion-list,
+body#tinymce .wysiwyg-accordion-list-with-bullets {
   border: solid 1px green;
 }

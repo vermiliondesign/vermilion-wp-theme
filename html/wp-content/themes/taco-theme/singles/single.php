@@ -53,7 +53,7 @@ $related_posts = $single->related_posts;
   
         
       <?php if(Arr::iterable($related_posts)) { ?>
-      <div class="module single-related-posts">
+      <div class="module single-related-posts content">
         <h3>Related Posts:</h3>
         <ul>
           <?php foreach($related_posts as $related_post) { ?>

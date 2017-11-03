@@ -43,6 +43,12 @@ p.back-button {
   }
 }
 
+.cta-wrapper-accordion {
+  a {
+    @include cta_wrapper;
+  }
+}
+
 .post-terms,
 .list-as-dropdown,
 .post-pagination {
